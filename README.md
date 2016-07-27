@@ -585,3 +585,29 @@ func getLocationWithMagic(completion: AddressBlock?) { ... }
 ```
 
 * Если в проекте используется *SwiftGen*, то перезапускать его желательно каждый раз, как обновлен/добавлен/удален соответствующий ресурс (изображение, локализуемая строка, т.д.), даже если, например, в коде он явно не использован.
+
+* Для повторяющихся кусков кода на локальном уровне хорошо внедрить локальную функцию:
+
+**Нежелательно:** 
+```swift
+tableView.registerNib(UINib(nibName: MapActionHeaderCell.nameOfClass, bundle: nil), forCellReuseIdentifier: MapActionHeaderCell.nameOfClass)
+tableView.registerNib(UINib(nibName: ActionFilledButtonCell.nameOfClass, bundle: nil), forCellReuseIdentifier: ActionFilledButtonCell.nameOfClass)
+tableView.registerNib(UINib(nibName: ActionTitledButtonCell.nameOfClass, bundle: nil), forCellReuseIdentifier: ActionTitledButtonCell.nameOfClass)
+tableView.registerNib(UINib(nibName: LoadingCell.nameOfClass, bundle: nil), forCellReuseIdentifier: LoadingCell.nameOfClass)
+tableView.registerNib(UINib(nibName: TextCell.nameOfClass, bundle: nil), forCellReuseIdentifier: TextCell.nameOfClass)
+tableView.registerNib(UINib(nibName: AddressInfoHeaderCell.nameOfClass, bundle: nil), forCellReuseIdentifier: AddressInfoHeaderCell.nameOfClass)
+tableView.registerNib(UINib(nibName: ImageCell.nameOfClass, bundle: nil), forCellReuseIdentifier: ImageCell.nameOfClass)
+```
+**Желательно:** 
+```swift
+let registerCell: UITableViewCell.Type -> Void = { type in
+    self.tableView.registerNib(UINib(nibName: type.nameOfClass, bundle: nil), forCellReuseIdentifier: type.nameOfClass)
+}
+registerCell(MapActionHeaderCell)
+registerCell(ActionFilledButtonCell)
+registerCell(ActionTitledButtonCell)
+registerCell(LoadingCell)
+registerCell(TextCell)
+registerCell(AddressInfoHeaderCell)
+registerCell(ImageCell)
+```
