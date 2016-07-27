@@ -539,6 +539,7 @@ if let me = a.myself, myDog = me.dog, dogsAge = myDog.age {
 ## Правила хорошего тона
 
 * Если большой кортеж или сигнатура функции начинают повторяться, что разумно выделить `typealias` и использовать его:
+
 **Нежелательно:** 
 ```swift
 func getLocationFromIp(completion: (Address? -> Void)?) { ... }
@@ -554,3 +555,4 @@ func getLocationFromCoreLocation(completion: AddressBlock?) { ... }
 func getLocationWithMagic(completion: AddressBlock?) { ... }
 ```
 
+* Если в проекте используется SwiftGen, то перезапускать его желательно каждый раз, как обновлен/добавлен/удален соответствующий ресурс (изображение, локализуемая строка, т.д.), даже если, например, в коде он явно не использован.
