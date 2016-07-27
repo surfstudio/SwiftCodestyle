@@ -270,10 +270,14 @@ class MyClass: BaseClass {
 // MARK: Extensions
 extension MyClass: Comparable { ... }
 extension MyClass: Equitable { ... }
+
+// MARK: Private extensions for private methods
+extension MyClass { ... }
 ```
 
 * Старайтесь опираться на нее и разделять блоки кода с помощью `// MARK:` для лучшей читабельности.
 * Соблюдение протоколов класса должны быть выделены в `extension`-блоки, как в примере выше.
+* Все методы, используемые как вспомогательные, должны быть скрыты в приватном расширении класса, как показано выше.
 * Убираем ненужные пустые методы вроде `override func viewDidRecieveMemoryWarning() { super.didRecieveMemoryWarning() }`.
 
 ### Комментарии
