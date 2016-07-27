@@ -116,7 +116,7 @@ a = 10
 **Нежелательно:** 
 ```swift
 print(myCart.cartWeight)
-print(myCar.cartWeight)
+print(myCar.cartSpeed)
 ```
 **Желательно:** 
 ```swift
