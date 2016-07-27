@@ -130,10 +130,10 @@ let z = x.appending(y)
 
 ```swift
   extension String {
-      public func compare(
-	 other: String, options: CompareOptions = [],
-	 range: Range? = nil, locale: Locale? = nil
-      ) -> Ordering
+      public func compare(other: String, 
+                        options: CompareOptions = [], 
+                          range: Range? = nil, 
+                         locale: Locale? = nil) -> Ordering
   }
   
   // Желательно:
@@ -163,7 +163,9 @@ enum Direction {
 
 ### Генерики
 
-Указывать не традиционное `T` или `U` в качестве имени обобщенного параметра, а более определенные, вроде `Element` или `Item`. Исключениями здесь могут быть, например, пользовательские операторы, являющиеся очень высокой абстракцией над данными.
+Указывать не традиционное `T` или `U` в качестве имени обобщенного параметра, а более определенные, вроде `Element` или `Item`. 
+
+Исключениями здесь могут быть, например, пользовательские операторы, являющиеся очень высокой абстракцией над данными.
 
 ## Организация кода
 
@@ -333,7 +335,7 @@ enum Colors {
 
 ### Опционалы
 
-* НЕ использовать `!` при объявлении переменных! Исключений всего 2: это взаимодействие с Objective-C кодом и невозможность вычислить инициализирующее значения до достижения некоторых условий. Например, нельзя прочитать `frame` некоторой `UIView` до того, как она загружена из `xib`:
+* Не использовать `!` при объявлении переменных! Исключений всего 2: это взаимодействие с Objective-C кодом и невозможность вычислить инициализирующее значения до достижения некоторых условий. Например, нельзя прочитать `frame` некоторой `UIView` до того, как она загружена из `xib`:
 
 ```swift
 class MyView : UIView {
@@ -390,3 +392,132 @@ let a: Array<String> = //...
 ```swift
 let a: [String] = //...
 ```
+
+### Методы и функции
+
+* В большинстве случаем, каждый новый элемент функциональности привязываем в качестве метода к существующим классам или, если метод чист, возможно вынесение в расширение протокола или существующего типа данных.
+
+* Допускается использование глобальных функций, если они симметричны и понятны, а также если раскрывают предназначение глобального оператора. 
+*Примеры*: `zip(a, b)`, `max(a,b)`, `sin(x)`.
+
+## Memory management
+
+### Weak, retain, strong
+
+* Пара объектов не должна держать сильные (`strong`) ссылки друг на друга во избежание утечек памяти.
+* Отличие между `weak` и `unowned` можно почерпнуть из документации Apple:
+
+> Use a weak reference whenever it is valid for that reference to become nil at some point during its lifetime. Conversely, use an unowned reference when you know that the reference will never be nil once it has been set during initialization.
+
+Кроме того, [этот ответ](http://stackoverflow.com/a/26025176) на StackOverflow поясняет все очень подробно.
+* Если в замыкании некоторого метода происходит захват `self`, то необходимо пользоваться следующей логикой:
+
+**Желательно:** 
+```swift
+resource.request().onComplete { [weak self] response in
+    guard let strongSelf = self else { return }
+    let model = strongSelf.updateModel(response)
+    strongSelf.updateUI(model)
+}
+```
+**Нежелательно:** 
+```swift
+// может упасть, если self выгружен из памяти до того, как получен ответ (response)
+resource.request().onComplete { [unowned self] response in
+  let model = self.updateModel(response)
+  self.updateUI(model)
+}
+
+// возможна выгрузка self из памяти в момент между обновлением модели и обновлением UI
+resource.request().onComplete { [weak self] response in
+  let model = self?.updateModel(response)
+  self?.updateUI(model)
+}
+```
+
+## Golden path
+
+### Guard
+
+* Нужно использовать, чтобы сразу выйти из метода при недостижении некоторых условий:
+```swift
+func vendAllNamed(itemName: String) throws {
+    guard isEnabled else {
+        throw VendingMachineError.Disabled
+    }
+    
+    let items = getItemsNamed(itemName)
+    
+    guard items.count > 0 else {
+        throw VendingMachineError.OutOfStock
+    }
+    
+    let totalPrice = items.reduce(0, combine: +)
+    
+    guard coinsDeposited >= totalPrice else {
+        throw VendingMachineError.InsufficientFunds
+    }
+    
+    coinsDeposited -= totalPrice
+    removeFromInventory(itemName)
+    dispenseSnacks(items)
+}
+```
+
+* Можно использовать, чтобы избежать вложенности в `if-let`-конструкциях:
+```swift
+func taskFromJSONResponse(jsonData: NSData) throws -> Task {
+    guard let json = decodeJSON(jsonData) as? [String: AnyObject] else {
+        throw ParsingError.InvalidJSON
+    }
+    
+    guard let id = json["id"] as? Int,
+          let name = json["name"] as? String,
+          let userId = json["user_id"] as? Int,
+          let position = json["pos"] as? Double
+    else {
+        throw ParsingError.MissingData
+    }
+    
+    return Task(id: id, name: name, userId: userId, position: position)
+}
+```
+
+* Не использовать, как "обратный `if`"
+* Не использовать, если в `else`-ветке содержится сложная логика.
+* Использование `if-let` не должно приводить к вложенности:
+**Нежелательно:** 
+```swift
+if let me = a.myself {
+    if let myDog = me.dog {
+        if let dogsAge = myDog.age {
+            print("My dog is \(dogsAge) years old")
+        }
+    }
+}
+```
+**Желательно:** 
+```swift
+if let me = a.myself, myDog = me.dog, dogsAge = myDog.age {
+    print("My dog is \(dogsAge) years old")
+}
+```
+
+## Правила хорошего тона
+
+* Если большой кортеж или сигнатура функции начинают повторяться, что разумно выделить `typealias` и использовать его:
+**Нежелательно:** 
+```swift
+func getLocationFromIp(completion: (Address? -> Void)?) { ... }
+func getLocationFromCoreLocation(completion: (Address? -> Void)?) { ... }
+func getLocationWithMagic(completion: (Address? -> Void)?) { ... }
+```
+**Желательно:** 
+```swift
+typealias AddressBlock = (Address? -> Void)
+
+func getLocationFromIp(completion: AddressBlock?) { ... }
+func getLocationFromCoreLocation(completion: AddressBlock?) { ... }
+func getLocationWithMagic(completion: AddressBlock?) { ... }
+```
+
