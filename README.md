@@ -615,3 +615,5 @@ registerCell(TextCell)
 registerCell(AddressInfoHeaderCell)
 registerCell(ImageCell)
 ```
+
+* Прочитываем собственные изменения в проекте, поставленные на коммит, перед тем, как их зафиксировать.
