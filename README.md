@@ -483,9 +483,9 @@ let a: [String] = //...
 **Желательно:** 
 ```swift
 resource.request().onComplete { [weak self] response in
-    guard let strongSelf = self else { return }
-    let model = strongSelf.updateModel(response)
-    strongSelf.updateUI(model)
+    guard let `self` = self else { return }
+    let model = self.updateModel(response)
+    self.updateUI(model)
 }
 ```
 **Нежелательно:** 
