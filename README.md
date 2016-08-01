@@ -1,4 +1,4 @@
-# Code style для iOS-разработчиков
+# Swift Code Style
 
 ## Содержание
 
