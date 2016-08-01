@@ -201,11 +201,17 @@ let z = x.appending(y)
 
 ### Перечислимые типы
 
-Элементы перечислимого типа именовать в camelCase, начиная с маленькой буквы:
+Элементы перечислимого типа именовать в camelCase, начиная с маленькой буквы, если используется Swift 3 версии, и с большой для 2-й, соответственно:
 
 ```swift
+// Swift 3
 enum Direction {
     case up, down, left, right
+}
+
+// Swift 2
+enum Direction {
+    case Up, Down, Left, Right
 }
 ```
 
