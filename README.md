@@ -41,7 +41,7 @@
 
 **Желательно:**
 ```swift
-let myColor = UIColor.white()
+let loadingColor = UIColor.white()
 ```
 
 **Нежелательно:**
