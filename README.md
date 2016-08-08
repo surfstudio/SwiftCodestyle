@@ -570,7 +570,9 @@ if let me = a.myself {
 ```
 **Желательно:** 
 ```swift
-if let me = a.myself, myDog = me.dog, dogsAge = myDog.age {
+if let me = a.myself, 
+       myDog = me.dog, 
+       dogsAge = myDog.age {
     print("My dog is \(dogsAge) years old")
 }
 ```
