@@ -623,3 +623,15 @@ registerCell(TextCell)
 registerCell(AddressInfoHeaderCell)
 registerCell(ImageCell)
 ```
+* Почему-то часто встречающийся косяк с двоеточием: точно так же, как и в русском языке, слева от него не ставится пробел, а справа ставится.
+
+**Нежелательно:** 
+```swift
+let a:Int = 4
+func do(x : UIImage) { ... }
+```
+**Желательно:** 
+```swift
+let a: Int = 4
+func do(x: UIImage) { ... }
+```
