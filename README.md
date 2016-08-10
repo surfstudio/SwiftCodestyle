@@ -560,8 +560,8 @@ func taskFromJSONResponse(jsonData: NSData) throws -> Task {
 
 **Нежелательно:** 
 ```swift
-if let me = a.myself {
-    if let myDog = me.dog {
+if let my = a.myself {
+    if let myDog = my.dog {
         if let dogsAge = myDog.age {
             print("My dog is \(dogsAge) years old")
         }
