@@ -1,637 +1,954 @@
-# Swift Code Style
+# Surf Swift Style Guide
 
-## Содержание
+## Цели
 
-* [Общее](#Общее)
-    * [Табуляция](#Табуляция)
-    * [Операторные скобки](#Операторные-скобки)
-    * [Типы данных](#Типы-данных)
-    * [Разделение операторов](#Разделение-операторов)
-    * [Объявление переменных](#Объявление-переменных)
-* [Именование переменных](#Именование-переменных)
-    * [Перечислимые типы](#Перечислимые-типы)
-    * [Протоколы](#Протоколы)
-    * [Селекторы](#Селекторы)
-    * [Генерики](#Генерики)
-* [Организация кода](#Организация-кода)
-    * [Структура класса](#Структура-класса)
-    * [Комментарии](#Комментарии)
-    * [Вычислимые свойства](#Вычислимые-свойства)
-    * [Замыкания](#Замыкания)
-    * [Автовыведение типов](#Автовыведение-типов)
-    * [Константы](#Константы)
-    * [Опционалы](#Опционалы)
-    * [Структуры](#Структуры)
-    * [Ленивая инициализация](#Ленивая-инициализация)
-    * [Синтаксический сахар](#Синтаксический-сахар)
-    * [Методы и функции](#Методы-и-функции)
-* [Memory management](#memory-management)
-    * [Weak, retain, strong](#weak-retain-strong)
-* [Golden path](#golden-path)
-    * [Guard](#guard)
-    * [If let](#if-let)
-* [Правила хорошего тона](#Правила-хорошего-тона)
+Этот стайлгайд создан с целью:
 
-## Язык
+* Облегчить чтение и понимание незнакомого кода
+* Облегчить поддержку кода
+* Уменьшить вероятность совершения простых ошибок кодинга
+* Снизить когнитивную нагрузку при кодинге
+* Сфокусировать обсуждения в Pull Request-ах на логике, а не на стиле
 
-Предполагается использование английского языка для именования переменных, методов, классов.
+Краткость кода не является основной целью. Код должен быть кратким только в том случае, если другие важные качества кода (такие как читаемость, простота и ясность) остаются равными или улучшаются.
 
-Далее для каждого проекта отдельно команда решает, стоит ли использовать для комментариев, commit messages и документации русский или английский. Определяется язык проекта. При не очень хорошем английском хотя бы у **одного** члена команды, надо всеми использовать русский. Для иностранных проектов использование английского для документации обязательно.
-Смотрим в репозиторий, спрашиваем у других, затем пишем commit message на нужном языке. Не нужно писать на ломаном английском в проекте, где все пишут комментарии на русском, а также оставлять непонятные русские комментарии в проекте с иностранным заказчиком.
+## Принципы
 
-**Желательно:**
-```swift
-let loadingColor = UIColor.white()
-```
+* Этот гайд являеся дополнением официальному [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/)
+* Мы стараемся сделать каждое правило проверяемым при помощи различных linter-ов
 
-**Нежелательно:**
-```swift
-let zagruzkaColor = UIColor.white()
-```
+## Table of Contents
 
-## Общее
+- [Surf Swift Style Guide](#surf-swift-style-guide)
+  - [Цели](#%D1%86%D0%B5%D0%BB%D0%B8)
+  - [Принципы](#%D0%BF%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF%D1%8B)
+  - [Table of Contents](#table-of-contents)
+  - [Xcode форматирование](#xcode-%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)
+  - [Именование](#%D0%B8%D0%BC%D0%B5%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)
+  - [Стиль](#%D1%81%D1%82%D0%B8%D0%BB%D1%8C)
+    - [Функции](#%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D0%B8)
+    - [Замыкания](#%D0%B7%D0%B0%D0%BC%D1%8B%D0%BA%D0%B0%D0%BD%D0%B8%D1%8F)
+    - [Операторы](#%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80%D1%8B)
+  - [Паттерны](#%D0%BF%D0%B0%D1%82%D1%82%D0%B5%D1%80%D0%BD%D1%8B)
+  - [Организация файлов](#%D0%BE%D1%80%D0%B3%D0%B0%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2)
+  - [Совместимость с Objective-C](#%D1%81%D0%BE%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D1%8C-%D1%81-objective-c)
 
-### Табуляция
-Используются отступы из 4 пробелов. Настроить это можно в меню XCode - Preferences - Text Editing - Indentation.
+## Xcode форматирование
 
-### Операторные скобки
-Принято открывающую скобку ставить на той же строке. В конструкциях с цепочками if-else-if `else` не переносится:
-```swift
-if a > b {
-	// do stuff
-} else {
-	// do another
-}
-```
+_Вы можете добавить эти настройки воспользовавшись [этим скриптом](resources/xcode_settings.bash), как вариант его вызов можно добавить в "Run Script" build phase._
 
-### Типы данных
+* <a id='column-width'></a>(<a href='#column-width'>link</a>) **Каждая строка должна иметь максимальную длину в 120 символов.** [![SwiftLint: line_length](https://img.shields.io/badge/SwiftLint-line__length-217D89.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#line-length)
 
-Не использовать `Objective-C`-структуры данных там, где есть их явный `Swift`-аналог.
+* <a id='spaces-over-tabs'></a>(<a href='#spaces-over-tabs'>link</a>) **Используйте 4 пробела для отступов.**
 
-**Нежелательно:** 
-```swift
-class MyClass: NSObject {
-    var myArray: NSArray<NSString>
-    
-    init() {
-        myArray = NSArray()
-        super.init()
-    }
-}
-```
-**Желательно:** 
-```swift
-class MyClass {
-    var myArray: [String]
-    
-    init() {
-        myArray = []
-    }
-}
-```
+* <a id='trailing-whitespace'></a>(<a href='#trailing-whitespace'>link</a>) **Строки не должны содержать пробелы в конце.**  [![SwiftFormat: trailingSpace](https://img.shields.io/badge/SwiftFormat-trailingSpace-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingSpace) [![SwiftLint: trailing_whitespace](https://img.shields.io/badge/SwiftLint-trailing__whitespace-217D89.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-whitespace)
 
-### Разделение операторов
-Точку с запятой (`;`) не ставить, использовать перенесение на новую строку для разделения операторов.
+## Именование
 
-**Нежелательно:**
-```swift
-var a = 5; a = 10;
-```
+* <a id='use-camel-case'></a>(<a href='#use-camel-case'>link</a>) **Используйте PascalCase для названий типов и протоколов, и lowerCamelCase для всего остального.** [![SwiftLint: type_name](https://img.shields.io/badge/SwiftLint-type__name-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#type-name)
 
-**Желательно:**
-```swift
-var a = 5
-a = 10
-```
+  <details>
 
-### Объявление переменных
-Использовать `let` при объявлении переменных по возможности всегда.
-
-## Именование переменных
-
-* Стараться не сокращать, давать понятные имена, отражающие роль переменной в контексте. 
-* Не использовать венгерскую нотацию (например, `kCLLocationManagerFilterNone`), snake case (`like_so`), или macro case (`LIKE_THIS`).
-* Опускать ненужные слова:
-
-**Нежелательно:** 
-```swift
-print(myCart.cartWeight)
-print(myCar.carSpeed)
-```
-**Желательно:** 
-```swift
-print(myCart.weight)
-print(myCar.speed)
-```
-
-* Именование переменных должно вести к тому, чтобы вызовы методов складывались в корректные английские фразы:
-
-**Нежелательно:** 
-```swift
-array.remove(x) // что такое x? Объект или индекс?
-
-x.insert(y, position: z)
-x.subViews(color: y)
-x.nounCapitalize()
-```
-**Желательно:** 
-```swift
-array.remove(at: index)
-array.remove(item)
-
-x.insert(y, at: z)          // x, insert y at z
-x.subViews(havingColor: y)  // x's subviews having color y
-x.capitalizingNouns()       // x, capitalizing nouns
-```
-
-* Именование параметров должно выделять единый уровень абстракции:
-
-**Нежелательно:** 
-```swift
-a.move(toX: b, y: c)
-a.fade(fromRed: b, green: c, blue: d)
-```
-**Желательно:** 
-```swift
-a.moveTo(x: b, y: c)
-a.fadeFrom(red: b, green: c, blue: d)
-```
-
-* Необходимо вводить дополнительные метки параметров, если это определяет предназначение:
-
-**Нежелательно:** 
-```swift
-viewController.dismiss(false) 
-words.split(12)
-```
-**Желательно:** 
-```swift
-viewController.dismiss(animated: false) 
-words.split(maxCount: 12)
-```
-
-* Именование мутирующих и не мутирующих функций должны отражаться в их сигнатуре:
-
-```swift
-// мутирующие
-array.sort()
-x.append(y)
-
-// немутирующие
-let result = array.sorted()
-let z = x.appending(y)
-```
-
-* Использовать значения параметров по умолчанию:
-
-```swift
-  extension String {
-      public func compare(other: String, 
-                        options: CompareOptions = [], 
-                          range: Range? = nil, 
-                         locale: Locale? = nil) -> Ordering
+  ```swift
+  protocol SpaceThing {
+    // ...
   }
-  
-  // Желательно:
-  let order = lastName.compare(royalFamilyName)
-  
-  // Нежелательно:
-  let order = lastName.compare(royalFamilyName, options: [], range: nil, locale: nil)
-```
 
-### Перечислимые типы
+  class SpaceFleet: SpaceThing {
 
-Элементы перечислимого типа именовать в camelCase, начиная с маленькой буквы, если используется Swift 3 версии, и с большой для 2-й, соответственно:
-
-```swift
-// Swift 3
-enum Direction {
-    case up, down, left, right
-}
-
-// Swift 2
-enum Direction {
-    case Up, Down, Left, Right
-}
-```
-
-### Протоколы
-
-Имена протоколов должны быть выражены в виде имен существительных, если оно описывает **предназначение** (например, `Collection`), или добавляются суффиксы `-able`, `-ed`, `-ing`, если это описывает **поведение** (например, `Equatable`, `ProgressReporting`).
-
-### Селекторы
-
-Использовать синтаксис вида `#selector(doSomething)`, не включая имя собственного класса (вроде `#selector(MyViewController.doSomething)`).
-
-### Генерики
-
-Указывать не традиционное `T` или `U` в качестве имени обобщенного параметра, а более определенные, вроде `Element` или `Item`. 
-
-Исключениями здесь могут быть, например, пользовательские операторы, являющиеся очень высокой абстракцией над данными.
-
-## Организация кода
-
-### Структура класса
-
-Класс имеет следующую структуру:
-
-```swift
-// MARK: Global operators taking the class as a params
-func == (lhs: MyClass, rhs: MyClass) -> Bool { ... }
-
-// MARK: Class
-class MyClass: BaseClass {
-    
-    // MARK: Declarations
-    
-    // 1.1. Outlets
-    @IBOutlet private weak let titleLabel: UILabel!
-    
-    // [1.1]. Publish subjects and observables [only if Rx is used]
-    var citySelected: PublishSubject<City>? = nil
-    
-    // 1.2. Public properties, calculated and lazy
-    var text: String { get { ... } set { ... } }
-    
-    // 1.3. Private properties
-    private let isUsingLasers = true
-    
-    // MARK: Lifecycle
-    
-    // 2.1. Initializers
-    init?(city: anotherCity) { ... }
-    
-    // 2.2. Lifecycle
-    override func awakeFromNib() { ... }
-    override func viewDidLoad() { ... }
-    
-    // MARK: Public
-    func fill(city: City) { ... }
-    func getPopulation() -> Int { ... }
-    
-    // MARK: Private
-    private func calculateOverpopulation() { ... }
-}
-
-// MARK: Extensions
-extension MyClass: Comparable { ... }
-extension MyClass: Equitable { ... }
-
-// MARK: Private extensions for private methods
-extension MyClass { ... }
-```
-
-* Старайтесь опираться на нее и разделять блоки кода с помощью `// MARK:` для лучшей читабельности.
-* Соблюдение протоколов класса должны быть выделены в `extension`-блоки, как в примере выше.
-* Все методы, используемые как вспомогательные, должны быть скрыты в приватном расширении класса, как показано выше.
-* Убираем ненужные пустые методы вроде `override func viewDidRecieveMemoryWarning() { super.didRecieveMemoryWarning() }`.
-
-### Комментарии
-
-В местах, где они нужны, комментарии должны объяснять, зачем некоторый код выполняет свою логику. Любые комментарии должны быть или релевантными и актуальными, или их не должно быть вовсе.
-
-Также не стоит забывать, что комментарии в виде `///` и `/** */` подхватываются IDE и впоследствие видны в панели справа.
-
-### Вычислимые свойства
-
-Если свойство имеет только один аксессор, то лучше его опустить:
-
-**Нежелательно:** 
-```swift
-var emptyString: String {
-    get {
-    	return ""
+    enum Formation {
+      // ...
     }
-}
-```
-**Желательно:** 
-```swift
-var emptyString: String {
-    return ""
-}
-```
+
+    class Spaceship {
+      // ...
+    }
+
+    var ships: [Spaceship] = []
+    static let worldName: String = "Earth"
+
+    func addShip(_ ship: Spaceship) {
+      // ...
+    }
+  }
+
+  let myFleet = SpaceFleet()
+  ```
+
+  </details>
+
+  _Исключение: Вы можете поставить префикс подчеркивания перед приватным свойством если оно повторяет свойство или метод с одинаковым именем с более высоким уровнем доступа_
+
+  <details>
+
+  #### Почему?
+  Есть некоторые случаи при которых повторение названия свойства или метода может быть проще для чтения и понимания, чем использование другого имени.
+
+  </details>
+
+* <a id='bool-names'></a>(<a href='#bool-names'>link</a>) **Называйте булевые переменные в формате `isSpaceship`, `hasSpacesuit`, и т.п.** Так становится понятнее, что это именно Bool тип данных, а не какой-либо другой.
+
+* <a id='capitalize-acronyms'></a>(<a href='#capitalize-acronyms'>link</a>) **Акронимы в названиях (например `URL`) должны быть в верхнем регистре за исключением случаев, когда это начало названия которое должно быть в lowerCamelCase**
+
+  <details>
+
+  ```swift
+  // Неправильно
+  class UrlValidator {
+
+    func isValidUrl(_ URL: URL) -> Bool {
+      // ...
+    }
+
+    func isUrlReachable(_ URL: URL) -> Bool {
+      // ...
+    }
+  }
+
+  let URLValidator = UrlValidator().isValidUrl(/* some URL */)
+
+  // Правильно
+  class URLValidator {
+
+    func isValidURL(_ url: URL) -> Bool {
+      // ...
+    }
+
+    func isURLReachable(_ url: URL) -> Bool {
+      // ...
+    }
+  }
+
+  let urlValidator = URLValidator().isValidURL(/* some URL */)
+  ```
+
+  </details>
+
+* <a id='general-part-first'></a>(<a href='#general-part-first'>link</a>) **Общая часть названия должна быть впереди, а более специфичная часть должна следовать за ней.** Значение "общая часть" зависит от конеткста, но должно примерно означать "то, что больше всего помогает вам сузить поиск нужного элемента." Самое главное, будьте последовательны с тем, как вы располагаете части имен.
+
+  <details>
+
+  ```swift
+  // Неправильно
+  let rightTitleMargin: CGFloat
+  let leftTitleMargin: CGFloat
+  let bodyRightMargin: CGFloat
+  let bodyLeftMargin: CGFloat
+
+  // Правильно
+  let titleMarginRight: CGFloat
+  let titleMarginLeft: CGFloat
+  let bodyMarginRight: CGFloat
+  let bodyMarginLeft: CGFloat
+  ```
+
+  </details>
+
+* <a id='hint-at-types'></a>(<a href='#hint-at-types'>link</a>) **Включите подсказку о типе в имя, если в противном случае оно будет неоднозначным.**
+
+  <details>
+
+  ```swift
+  // Неправильно
+  let title: String
+  let cancel: UIButton
+
+  // Правильно
+  let titleText: String
+  let cancelButton: UIButton
+  ```
+
+  </details>
+
+* <a id='past-tense-events'></a>(<a href='#past-tense-events'>link</a>) **Обработчики событий должны быть названы как предложения в настоящем времени.** Детали можно опустить, если они не нужны для ясности.
+
+  <details>
+
+  ```swift
+  // Неправильно
+  class SomeViewController {
+
+    private func didTapLogin() {
+      // ...
+    }
+
+    private func didTapBookButton() {
+      // ...
+    }
+
+    private func modelDidChange() {
+      // ...
+    }
+  }
+
+  // Правильно
+  class SomeViewController {
+
+    private func login() {
+      // ...
+    }
+
+    private func handleBookButtonTap() {
+      // ...
+    }
+
+    private func modelChanged() {
+      // ...
+    }
+  }
+  ```
+
+## Стиль
+
+* <a id='use-implicit-types'></a>(<a href='#use-implicit-types'>link</a>) **Не указываете типы там, где они легко могут быть выведены**
+
+  <details>
+
+  ```swift
+  // Неправильно
+  let host: Host = Host()
+
+  // Правильно
+  let host = Host()
+  ```
+
+  ```swift
+  enum Direction {
+    case left
+    case right
+  }
+
+  func someDirection() -> Direction {
+    // Неправильно
+    return Direction.left
+
+    // Правильно
+    return .left
+  }
+  ```
+
+  </details>
+
+* <a id='use-implicit-types'></a>(<a href='#use-implicit-types'>link</a>) **Условные операторы должны всегда вызывать `return` в следующей строке** [![SwiftLint: conditional_returns_on_newline](https://img.shields.io/badge/SwiftLint-trailing__comma-217D89.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#conditional-returns-on-newline)
+
+  <details>
+
+  ```swift
+  // Неправильно
+  guard true else { return }
+
+  if true { return }
+
+  // Правильно
+  guard true else {
+    return
+  }
+
+  if true {
+    return
+  }
+  ```
+
+  </details>
+
+* <a id='omit-self'></a>(<a href='#omit-self'>link</a>) **Не используйте `self` пока это не нужно для уточнения или пока того не требует язык** [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantSelf)
+
+  <details>
+
+  ```swift
+  final class Listing {
+
+    init(capacity: Int, allowsPets: Bool) {
+      // Неправильно
+      self.capacity = capacity
+      self.isFamilyFriendly = !allowsPets // `self.` not required here
+
+      // Правильно
+      self.capacity = capacity
+      isFamilyFriendly = !allowsPets
+    }
+
+    private let isFamilyFriendly: Bool
+    private var capacity: Int
+
+    private func increaseCapacity(by amount: Int) {
+      // Неправильно
+      self.capacity += amount
+
+      // Правильно
+      capacity += amount
+
+      // Неправильно
+      self.save()
+
+      // Правильно
+      save()
+    }
+  }
+  ```
+
+  </details>
+
+* <a id='trailing-comma-array'></a>(<a href='#trailing-comma-array'>link</a>) **Следует избегать закрывающей запятой в массивах и словарях** [![SwiftLint: trailing_comma](https://img.shields.io/badge/SwiftLint-trailing__comma-217D89.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-comma)
+
+  <details>
+
+  ```swift
+  // Неправильно
+  let rowContent = [
+    listingUrgencyDatesRowContent(),
+    listingUrgencyBookedRowContent(),
+    listingUrgencyBookedShortRowContent(),
+  ]
+
+  // Правильно
+  let rowContent = [
+    listingUrgencyDatesRowContent(),
+    listingUrgencyBookedRowContent(),
+    listingUrgencyBookedShortRowContent()
+  ]
+  ```
+
+  </details>
+
+* <a id='name-tuple-elements'></a>(<a href='#name-tuple-elements'>link</a>) **Именуйте свойства в кортеже для большей ясности** Эмпирическое правило: если у вас есть более 3 полей, вы, вероятно, должны использовать структуру.
+
+  <details>
+
+  ```swift
+  // Неправильно
+  func whatever() -> (Int, Int) {
+    return (4, 4)
+  }
+  let thing = whatever()
+  print(thing.0)
+
+  // Правильно
+  func whatever() -> (x: Int, y: Int) {
+    return (x: 4, y: 4)
+  }
+
+  // Так тоже можно
+  func whatever2() -> (x: Int, y: Int) {
+    let x = 4
+    let y = 4
+    return (x, y)
+  }
+
+  let coord = whatever()
+  coord.x
+  coord.y
+  ```
+
+  </details>
+
+* <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Используйте конструкторы вместо Make() функций для CGRect, CGPoint, NSRange и других.** [![SwiftLint: legacy_constructor](https://img.shields.io/badge/SwiftLint-legacy__constructor-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor)
+
+  <details>
+
+  ```swift
+  // Неправильно
+  let rect = CGRectMake(10, 10, 10, 10)
+
+  // Правильно
+  let rect = CGRect(x: 0, y: 0, width: 10, height: 10)
+  ```
+
+  </details>
+
+* <a id='use-modern-swift-extensions'></a>(<a href='#use-modern-swift-extensions'>link</a>) **Используйте современные Swift расширения методов вместо старых глобальных методов из Objective-C.** [![SwiftLint: legacy_cggeometry_functions](https://img.shields.io/badge/SwiftLint-legacy__cggeometry__functions-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-cggeometry-functions) [![SwiftLint: legacy_constant](https://img.shields.io/badge/SwiftLint-legacy__constant-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constant) [![SwiftLint: legacy_nsgeometry_functions](https://img.shields.io/badge/SwiftLint-legacy__nsgeometry__functions-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-nsgeometry-functions)
+
+  <details>
+
+  ```swift
+  // Неправильно
+  var rect = CGRectZero
+  var width = CGRectGetWidth(rect)
+
+  // Правильно
+  var rect = CGRect.zero
+  var width = rect.width
+  ```
+
+  </details>
+
+* <a id='colon-spacing'></a>(<a href='#colon-spacing'>link</a>) **Ставьте двоеточие и пробел сразу после идентификатора.** [![SwiftLint: colon](https://img.shields.io/badge/SwiftLint-colon-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#colon)
+
+  <details>
+
+  ```swift
+  // Неправильно
+  var something : Double = 0
+
+  // Правильно
+  var something: Double = 0
+  ```
+
+  ```swift
+  // Неправильно
+  class MyClass : SuperClass {
+    // ...
+  }
+
+  // Правильно
+  class MyClass: SuperClass {
+    // ...
+  }
+  ```
+
+  ```swift
+  // Неправильно
+  var dict = [KeyType:ValueType]()
+  var dict = [KeyType : ValueType]()
+
+  // Правильно
+  var dict = [KeyType: ValueType]()
+  ```
+
+  </details>
+
+* <a id='return-arrow-spacing'></a>(<a href='#return-arrow-spacing'>link</a>) **Ставьте пробел по обеим сторонам стрелки возвращаемого типа.** [![SwiftLint: return_arrow_whitespace](https://img.shields.io/badge/SwiftLint-return__arrow__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#returning-whitespace)
+
+  <details>
+
+  ```swift
+  // Неправильно
+  func doSomething()->String {
+    // ...
+  }
+
+  // Правильно
+  func doSomething() -> String {
+    // ...
+  }
+  ```
+
+  ```swift
+  // Неправильно
+  func doSomething(completion: ()->Void) {
+    // ...
+  }
+
+  // Правильно
+  func doSomething(completion: () -> Void) {
+    // ...
+  }
+  ```
+
+  </details>
+
+* <a id='unnecessary-parens'></a>(<a href='#unnecessary-parens'>link</a>) **Избегайте лишних скобок.** [![SwiftFormat: redundantParens](https://img.shields.io/badge/SwiftFormat-redundantParens-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantParens)
+
+  <details>
+
+  ```swift
+  // Неправильно
+  if (userCount > 0) { ... }
+  switch (someValue) { ... }
+  let evens = userCounts.filter { (number) in number % 2 == 0 }
+  let squares = userCounts.map() { $0 * $0 }
+
+  // Правильно
+  if userCount > 0 { ... }
+  switch someValue { ... }
+  let evens = userCounts.filter { number in number % 2 == 0 }
+  let squares = userCounts.map { $0 * $0 }
+  ```
+
+  </details>
+
+* <a id='unnecessary-enum-arguments'></a> (<a href='#unnecessary-enum-arguments'>link</a>) **Опустите аргументы case, если они все без имени** [![SwiftLint: empty_enum_arguments](https://img.shields.io/badge/SwiftLint-empty__enum__arguments-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-enum-arguments)
+
+  <details>
+
+  ```swift
+  // Неправильно
+  if case .done(_) = result { ... }
+
+  switch animal {
+  case .dog(_, _, _):
+    ...
+  }
+
+  // Правильно
+  if case .done = result { ... }
+
+  switch animal {
+  case .dog:
+    ...
+  }
+  ```
+
+  </details>
+
+### Функции
+
+* <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Опускайте возвращаемы тип `Void`.** [![SwiftLint: redundant_void_return](https://img.shields.io/badge/SwiftLint-redundant__void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
+
+  <details>
+
+  ```swift
+  // Неправильно
+  func doSomething() -> Void {
+    ...
+  }
+
+  // Правильно
+  func doSomething() {
+    ...
+  }
+  ```
+
+  </details>
 
 ### Замыкания
 
-* Пользуемся механизмом автовыведения типов: не указываем тип входных, и, если возможно, выходных параметров:
+* <a id='favor-void-closure-return'></a>(<a href='#favor-void-closure-return'>link</a>) **Используйте возвращаемый тип `Void` вместо `()` в определении замыкания.** [![SwiftLint: void_return](https://img.shields.io/badge/SwiftLint-void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#void-return)
 
-**Нежелательно:** 
-```swift
-[1, 2, 3, 4, 5].filter { (a: Int) -> Bool in
-    return a > 3
-}
-```
-**Желательно:** 
-```swift
-[1, 2, 3, 4, 5].filter { a in return a > 3 }
-```
+  <details>
 
-* Дополняя пример выше: не вводим именование входных параметров, если возможно, а так же используем неявный `return`:
+  ```swift
+  // Неправильно
+  func method(completion: () -> ()) {
+    ...
+  }
 
-**Еще желательнее:** 
-```swift
-[1, 2, 3, 4, 5].filter { $0 > 3 }
-```
+  // Правильно
+  func method(completion: () -> Void) {
+    ...
+  }
+  ```
 
-* Используем синтаксис trailing closures:
+  </details>
 
-**Нежелательно:** 
-```swift
-a.perform(completion: { result in 
-    // ...
-})
+* <a id='unused-closure-parameter-naming'></a>(<a href='#unused-closure-parameter-naming'>link</a>) **Именуйте неиспользуемые параметры замыкания как нижние подчеркивания (`_`).** [![SwiftLint: unused_closure_parameter](https://img.shields.io/badge/SwiftLint-unused__closure__parameter-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-closure-parameter)
 
-UIView.animateWithDuration(0.3, completion: { finished in 
-    // ... 
-})
-```
-**Желательно:** 
-```swift
-a.perform { result in 
-    // ...
-}
+    <details>
 
-UIView.animateWithDuration(0.3) { finished in 
-    // ... 
-}
-```
+    #### Почему?
+    Это упрощает чтение, так становится очевидно какие параметры используются, а какие не используются.
 
-* При использование цепочки методов, принимающих функции преобразования, код должен быть отформатирован соответствующе:
-
-**Нежелательно:** 
-```swift
-["my", "gem", "deer"].map { $0.characters.count }.filter { $0 > 2 }.filter { $0 % 2 == 0 }
-```
-**Желательно:** 
-```swift
-["my", "gem", "deer"].map { $0.characters.count }
-    .filter { $0 > 2 }
-    .filter { $0 % 2 == 0 }
-```
-
-**NB**: Это же касается и FRP-операторов *RxSwift*.
-
-### Автовыведение типов
-
-Оно есть. И важно про него не забывать. Не указываем тип до тех пор, пока компилятор уж совсем к стенке не прижмет.
-
-**Нежелательно:** 
-```swift
-var obvslString: String = ""
-var obvslArray: [String] = [String]()
-var obvslDouble: Double = 14.57
-```
-**Желательно:** 
-```swift
-var obvslString = ""
-var obvslArray: [String] = []
-var obvslDouble = 14.57
-var notSoObviouslyFloat: CGFloat = 13.012
-```
-
-### Константы
-
-* Локальные константы класса достаточно объявить `let`-конструкцией.
-* Общепроектные константы лучше не делать глобальные, а определить в рамках `enum`:
-
-```swift
-enum Colors {
-    static let CustomRed = UIColor(red: 250/255.0, green: 15/255.0, blue: 20/255.0, alpha: 1.0)
-    static let CustomBlue = UIColor(red: 10/255.0, green: 0, blue: 200/255.0, alpha: 1.0)
-}
-```
-
-### Опционалы
-
-* Не использовать `!` при объявлении переменных! Исключений всего 2: это взаимодействие с Objective-C кодом и невозможность вычислить инициализирующее значения до достижения некоторых условий. Например, нельзя прочитать `frame` некоторой `UIView` до того, как она загружена из `xib`:
-
-```swift
-class MyView : UIView {
-    @IBOutlet var button : UIButton!
-    var buttonOriginalWidth : CGFloat!
-
-    override func awakeFromNib() {
-        self.buttonOriginalWidth = self.button.frame.size.width
+    ```swift
+    // Неправильно
+    someAsyncThing() { argument1, argument2, argument3 in
+      print(argument3)
     }
-}
-```
 
-* Не использовать `!` для force unwrapping. Вместо этого использовать `?.` или `if-let` конструкции.
-
-```swift 
-let latitude = me.homeTown?.location?.latitude
-if let town = me.homeTown, location = town.location {
-    // access latitude, longitude
-}
-```
-
-### Структуры
-
-При работе с CoreGraphics использовать инициализаторы структур вместо глобальных С-функций:
-
-**Нежелательно:** 
-```swift
-CGPointMake(1, 1)
-CGRectMake(0, 0, 100, 20)
-```
-**Желательно:** 
-```swift
-CGPoint(x: 1, y: 1)
-CGRect(x: 0, y: 0, width: 100, height: 20)
-```
-
-### Ленивая инициализация
-
-Если инициализирующий вычислимый код занимает много места, разумно выделить его в метод-фабрику с приставкой `make`. Важно отметить, что `[unowned self]` в таком случае использовать не нужно, так как не создается retain cycle.
-
-```swift
-lazy var myButton = self.makeButton()
-// ...
-private func makeButton() -> UIButton { ... }
-```
-
-### Синтаксический сахар
-
-**Нежелательно:** 
-```swift
-let a: Array<String> = //...
-```
-**Желательно:** 
-```swift
-let a: [String] = //...
-```
-
-### Методы и функции
-
-* В большинстве случаев, каждый новый элемент функциональности привязываем в качестве метода к существующим классам или, если метод чист, возможно вынесение в расширение протокола или существующего типа данных.
-
-* Допускается использование глобальных функций, если они симметричны и понятны, а также если раскрывают предназначение глобального оператора. 
-*Примеры*: `zip(a, b)`, `max(a,b)`, `sin(x)`.
-
-## Memory management
-
-### Weak, retain, strong
-
-* Пара объектов не должна держать сильные (`strong`) ссылки друг на друга во избежание утечек памяти.
-* Отличие между `weak` и `unowned` можно почерпнуть из документации Apple:
-
-> Use a weak reference whenever it is valid for that reference to become nil at some point during its lifetime. Conversely, use an unowned reference when you know that the reference will never be nil once it has been set during initialization.
-
-Кроме того, [этот ответ](http://stackoverflow.com/a/26025176) на StackOverflow поясняет все очень подробно.
-* Если в замыкании некоторого метода происходит захват `self`, то необходимо пользоваться следующей логикой:
-
-**Желательно:** 
-```swift
-resource.request().onComplete { [weak self] response in
-    guard let `self` = self else { return }
-    let model = self.updateModel(response)
-    self.updateUI(model)
-}
-```
-**Нежелательно:** 
-```swift
-// может упасть, если self выгружен из памяти до того, как получен ответ (response)
-resource.request().onComplete { [unowned self] response in
-  let model = self.updateModel(response)
-  self.updateUI(model)
-}
-
-// возможна выгрузка self из памяти в момент между обновлением модели и обновлением UI
-resource.request().onComplete { [weak self] response in
-  let model = self?.updateModel(response)
-  self?.updateUI(model)
-}
-```
-
-## Golden path
-
-### Guard
-
-* Нужно использовать, чтобы сразу выйти из метода при недостижении некоторых условий:
-```swift
-func vendAllNamed(itemName: String) throws {
-    guard isEnabled else {
-        throw VendingMachineError.Disabled
+    // Правильно
+    someAsyncThing() { _, _, argument3 in
+      print(argument3)
     }
-    
-    let items = getItemsNamed(itemName)
-    
-    guard items.count > 0 else {
-        throw VendingMachineError.OutOfStock
+    ```
+
+    </details>
+
+* <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Однострочные замыкания должны содержать по одному пробелу до и после каждой скобки, за исключением пробела между закрывающей скобкой и следующим оператором.** [![SwiftLint: closure_spacing](https://img.shields.io/badge/SwiftLint-closure__spacing-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
+
+  <details>
+
+  ```swift
+  // Неправильно
+  let evenSquares = numbers.filter {$0 % 2 == 0}.map {  $0 * $0  }
+
+  // Правильно
+  let evenSquares = numbers.filter { $0 % 2 == 0 }.map { $0 * $0 }
+  ```
+
+  </details>
+
+### Операторы
+
+* <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Инфиксные операторы должны отделятся одним пробелом с каждой стороны.** Предпочитайте скобки, чтобы визуально группировать выражения с большим количеством операторов, а не изменять ширину пробелов. Это правило не относится к операторам диапазона (например, `1...3`) и к префиксным или постфиксным операторам (например, `guest?` или `-1`). [![SwiftLint: operator_usage_whitespace](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#operator-usage-whitespace)
+
+  <details>
+
+  ```swift
+  // Неправильно
+  let capacity = 1+2
+  let capacity = currentCapacity   ?? 0
+  let mask = (UIAccessibilityTraitButton|UIAccessibilityTraitSelected)
+  let capacity=newCapacity
+  let latitude = region.center.latitude - region.span.latitudeDelta/2.0
+
+  // Правильно
+  let capacity = 1 + 2
+  let capacity = currentCapacity ?? 0
+  let mask = (UIAccessibilityTraitButton | UIAccessibilityTraitSelected)
+  let capacity = newCapacity
+  let latitude = region.center.latitude - (region.span.latitudeDelta / 2.0)
+  ```
+
+  </details>
+
+## Паттерны
+
+* <a id='implicitly-unwrapped-optionals'></a>(<a href='#implicitly-unwrapped-optionals'>link</a>) **Инициализируйте свойства в `init` где это возможно, а не используйте форс-анвраппинг.**  Заметным исключением является UIViewController и его `view` свойство. [![SwiftLint: implicitly_unwrapped_optional](https://img.shields.io/badge/SwiftLint-implicitly__unwrapped__optional-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#implicitly-unwrapped-optional)
+
+  <details>
+
+  ```swift
+  // Неправильно
+  class MyClass: NSObject {
+
+    var someValue: Int!
+
+    init() {
+      super.init()
+      someValue = 5
     }
-    
-    let totalPrice = items.reduce(0, combine: +)
-    
-    guard coinsDeposited >= totalPrice else {
-        throw VendingMachineError.InsufficientFunds
+
+  }
+
+  // Правильно
+  class MyClass: NSObject {
+
+    var someValue: Int
+
+    init() {
+      someValue = 0
+      super.init()
     }
-    
-    coinsDeposited -= totalPrice
-    removeFromInventory(itemName)
-    dispenseSnacks(items)
-}
-```
 
-* Можно использовать, чтобы избежать вложенности в `if-let`-конструкциях:
-```swift
-func taskFromJSONResponse(jsonData: NSData) throws -> Task {
-    guard let json = decodeJSON(jsonData) as? [String: AnyObject] else {
-        throw ParsingError.InvalidJSON
-    }
-    
-    guard let id = json["id"] as? Int,
-          let name = json["name"] as? String,
-          let userId = json["user_id"] as? Int,
-          let position = json["pos"] as? Double
-    else {
-        throw ParsingError.MissingData
-    }
-    
-    return Task(id: id, name: name, userId: userId, position: position)
-}
-```
+  }
+  ```
 
-* Не использовать, как "обратный `if`"
-* Не использовать, если в `else`-ветке содержится сложная логика.
+  </details>
 
-### If let
+* <a id='time-intensive-init'></a>(<a href='#time-intensive-init'>link</a>) **Избегайте выполнение любой значимой или времязратной работый в `init()`.** Избегайте таких действий, как открытие соединения с базой данных, выполнение запросов в сеть, чтение большого объема данных с диска и т.п. Создайте метод вроде `start()` если вам нужно чтобы эти действия были выполнены до того как объект будет готов к использованию.
 
-Использование `if-let` не должно приводить к вложенности:
+* <a id='complex-property-observers'></a>(<a href='#complex-property-observers'>link</a>) **Выносите сложные наблюдатели свойств в методы.** Это уменьшает вложенность, отделяет сайд-эффекты от объявления и делает явным использование неявно передаваемых параметров, таких как `oldValue`.
 
-**Нежелательно:** 
-```swift
-if let my = a.myself {
-    if let myDog = my.dog {
-        if let dogsAge = myDog.age {
-            print("My dog is \(dogsAge) years old")
+  <details>
+
+  ```swift
+  // Неправильно
+  class TextField {
+    var text: String? {
+      didSet {
+        guard oldValue != text else {
+          return
         }
+
+        // Куча побочных эффектов связанных с текстом
+      }
     }
-}
-```
-**Желательно:** 
-```swift
-if let me = a.myself, 
-       myDog = me.dog, 
-       dogsAge = myDog.age {
-    print("My dog is \(dogsAge) years old")
-}
-```
+  }
 
-## Правила хорошего тона
+  // Правильно
+  class TextField {
+    var text: String? {
+      didSet { updateText(from: oldValue) }
+    }
 
-* Если большой кортеж или сигнатура функции начинают повторяться, что разумно выделить `typealias` и использовать его:
+    private func updateText(from oldValue: String?) {
+      guard oldValue != text else {
+        return
+      }
 
-**Нежелательно:** 
-```swift
-func getLocationFromIp(completion: (Address? -> Void)?) { ... }
-func getLocationFromCoreLocation(completion: (Address? -> Void)?) { ... }
-func getLocationWithMagic(completion: (Address? -> Void)?) { ... }
-```
-**Желательно:** 
-```swift
-typealias AddressBlock = (Address? -> Void)
+        // Куча побочных эффектов связанных с текстом
+    }
+  }
+  ```
 
-func getLocationFromIp(completion: AddressBlock?) { ... }
-func getLocationFromCoreLocation(completion: AddressBlock?) { ... }
-func getLocationWithMagic(completion: AddressBlock?) { ... }
-```
+  </details>
 
-* Если в проекте используется *SwiftGen*, то перезапускать его желательно каждый раз, как обновлен/добавлен/удален соответствующий ресурс (изображение, локализуемая строка, т.д.), даже если, например, в коде он явно не использован.
+* <a id='complex-callback-block'></a>(<a href='#complex-callback-block'>link</a>) **Выносите сложные определения замыканий в методы**.  Это уменьшает вложенность и сложность использования weak-self в блоках. Если необходимо сослаться на self в вызове замыкания, используйте `guard`, чтобы развернуть self на время вызова.
 
-* Для повторяющихся кусков кода на локальном уровне хорошо внедрить локальную функцию:
+  <details>
 
-**Нежелательно:** 
-```swift
-tableView.registerNib(UINib(nibName: MapActionHeaderCell.nameOfClass, bundle: nil), forCellReuseIdentifier: MapActionHeaderCell.nameOfClass)
-tableView.registerNib(UINib(nibName: ActionFilledButtonCell.nameOfClass, bundle: nil), forCellReuseIdentifier: ActionFilledButtonCell.nameOfClass)
-tableView.registerNib(UINib(nibName: ActionTitledButtonCell.nameOfClass, bundle: nil), forCellReuseIdentifier: ActionTitledButtonCell.nameOfClass)
-tableView.registerNib(UINib(nibName: LoadingCell.nameOfClass, bundle: nil), forCellReuseIdentifier: LoadingCell.nameOfClass)
-tableView.registerNib(UINib(nibName: TextCell.nameOfClass, bundle: nil), forCellReuseIdentifier: TextCell.nameOfClass)
-tableView.registerNib(UINib(nibName: AddressInfoHeaderCell.nameOfClass, bundle: nil), forCellReuseIdentifier: AddressInfoHeaderCell.nameOfClass)
-tableView.registerNib(UINib(nibName: ImageCell.nameOfClass, bundle: nil), forCellReuseIdentifier: ImageCell.nameOfClass)
-```
-**Желательно:** 
-```swift
-let registerCell: UITableViewCell.Type -> Void = { type in
-    self.tableView.registerNib(UINib(nibName: type.nameOfClass, bundle: nil), forCellReuseIdentifier: type.nameOfClass)
-}
-registerCell(MapActionHeaderCell)
-registerCell(ActionFilledButtonCell)
-registerCell(ActionTitledButtonCell)
-registerCell(LoadingCell)
-registerCell(TextCell)
-registerCell(AddressInfoHeaderCell)
-registerCell(ImageCell)
-```
-* Почему-то часто встречающийся косяк с двоеточием: точно так же, как и в русском языке, слева от него не ставится пробел, а справа ставится.
+  ```swift
+  // Неправильно
+  class MyClass {
 
-**Нежелательно:** 
-```swift
-let a:Int = 4
-func do(x : UIImage) { ... }
-```
-**Желательно:** 
-```swift
-let a: Int = 4
-func do(x: UIImage) { ... }
-```
+    func request(completion: () -> Void) {
+      API.request() { [weak self] response in
+        if let strongSelf = self {
+          // Processing and side effects
+        }
+        completion()
+      }
+    }
+  }
+
+  // Правильно
+  class MyClass {
+
+    func request(completion: () -> Void) {
+      API.request() { [weak self] response in
+        guard let strongSelf = self else { return }
+        strongSelf.doSomething(strongSelf.property)
+        completion()
+      }
+    }
+
+    func doSomething(nonOptionalParameter: SomeClass) {
+      // Processing and side effects
+    }
+  }
+  ```
+
+  </details>
+
+* <a id='guards-at-top'></a>(<a href='#guards-at-top'>link</a>) **Используйте `guard` в начале скоупа.**
+
+  <details>
+
+  #### Почему?
+  Проще рассуждать о блоке кода, когда все операторы `guard` сгруппированы вверху, а не смешаны с бизнес-логикой.
+
+  </details>
+
+* <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Контроль доступа должен быть максимально строгим.** Предпочитайте использование `public` вместо `open` и `private` вместо `fileprivate` пока вам не понадобится это поведение.
+
+* <a id='avoid-global-functions'></a>(<a href='#avoid-global-functions'>link</a>) **Избегайте глобальных функций где это возможно.** Предпочитайте методы в определениях типов.
+
+  <details>
+
+  ```swift
+  // Неправильно
+  func age(of person, bornAt timeInterval) -> Int {
+    // ...
+  }
+
+  func jump(person: Person) {
+    // ...
+  }
+
+  // Правильно
+  class Person {
+    var bornAt: TimeInterval
+
+    var age: Int {
+      // ...
+    }
+
+    func jump() {
+      // ...
+    }
+  }
+  ```
+
+  </details>
+
+* <a id='private-constants'></a>(<a href='#private-constants'>link</a>) **Предпочитайте выделять константы в закрытый enum.** Если константы должны быть открыты, сделайте их статичными внутри определения класса.
+
+  <details>
+
+  ```swift
+  public class MyClass {
+
+    private enum Constants {
+      static let privateValue = "private"
+    }
+
+    public static let publicValue = "public"
+
+    func doSomething() {
+      print(Constants.privateValue)
+      print(MyClass.publicValue)
+    }
+  }
+  ```
+
+  </details>
+
+* <a id='namespace-using-enums'></a>(<a href='#namespace-using-enums'>link</a>) **Используйте `enum` без case для организации `public` или `internal` констант и функций в пространства имен.** Избегайте создания глобальных констант или функций. Не стесняйтесь вкладывать пространства имен, где это добавляет ясности.
+
+  <details>
+
+  #### Почему?
+  `enum`-ы без case хорошо работают как пространства имен так как они не могут быть созданы, что соответствует их назначению.
+
+  ```swift
+  enum Environment {
+
+    enum Earth {
+      static let gravity = 9.8
+    }
+
+    enum Moon {
+      static let gravity = 1.6
+    }
+  }
+  ```
+
+  </details>
+
+* <a id='prefer-immutable-values'></a>(<a href='#prefer-immutable-values'>link</a>) **Используйте неизменяемые значения где это возможно.** Используйте `map` и `compactMap` вместо добавления в новую коллекцию. Используйте `filter` вмето удаления элементов из изменяемой коллекции.
+
+  <details>
+
+  #### Почему?
+  Изменяемые свойства увеличивают сложность, поэтому старайтесь держать их в максимально узкой области.
+
+  ```swift
+  // Неправильно
+  var results = [SomeType]()
+  for element in input {
+    let result = transform(element)
+    results.append(result)
+  }
+
+  // Правильно
+  let results = input.map { transform($0) }
+  ```
+
+  ```swift
+  // Неправильно
+  var results = [SomeType]()
+  for element in input {
+    if let result = transformThatReturnsAnOptional(element) {
+      results.append(result)
+    }
+  }
+
+  // Правильно
+  let results = input.compactMap { transformThatReturnsAnOptional($0) }
+  ```
+
+  </details>
+
+* <a id='final-classes-by-default'></a>(<a href='#final-classes-by-default'>link</a>) **Классы должны быть `final`, если другого не требует логика.**
+
+  <details>
+
+  #### Почему?
+  Если класс должен быть переопределен, автор должен указать эту функциональность, опуская ключевое слово `final`.
+
+  ```swift
+  // Неправильно
+  class SettingsRepository {
+    // ...
+  }
+
+  // Правильно
+  final class SettingsRepository {
+    // ...
+  }
+  ```
+
+  </details>
+
+* <a id='switch-never-default'></a>(<a href='#switch-never-default'>link</a>) **Никогда не используйте `default` case в `switch`.**
+
+  <details>
+
+  #### Почему?
+  Перечисление каждого case требует, чтобы разработчики и ревьюеры учитывали правильность каждого оператора switch при добавлении новых case.
+
+  ```swift
+  // Неправильно
+  switch anEnum {
+  case .a:
+    // Do something
+  default:
+    // Do something else.
+  }
+
+  // Правильно
+  switch anEnum {
+  case .a:
+    // Do something
+  case .b, .c:
+    // Do something else.
+  }
+  ```
+
+  </details>
+
+* <a id='optional-nil-check'></a>(<a href='#optional-nil-check'>link</a>) **Проверьте значение nil вместо использования разворачивания, если значение не требуется.** [![SwiftLint: unused_optional_binding](https://img.shields.io/badge/SwiftLint-unused_optional_binding-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-optional-binding)
+
+## Организация файлов
+
+* <a id='alphabetize-imports'></a>(<a href='#alphabetize-imports'>link</a>) **Сортируйте импорты по алфавиту и ставьте их после комментариев в заголовке файла.** [![SwiftFormat: sortedImports](https://img.shields.io/badge/SwiftFormat-sortedImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#sortedImports)
+
+  <details>
+
+  #### Почему?
+  Стандартный метод организации помогает инженерам быстрее определить, от каких модулей зависит файл.
+
+  ```swift
+  // Неправильно
+
+  //  Copyright © 2018 Airbnb. All rights reserved.
+  //
+  import DLSPrimitives
+  import Constellation
+  import Epoxy
+
+  import Foundation
+
+  // Правильно
+
+  //  Copyright © 2018 Airbnb. All rights reserved.
+  //
+
+  import Constellation
+  import DLSPrimitives
+  import Epoxy
+  import Foundation
+  ```
+
+  </details>
+
+  _Исключение: `@testable import` должны быть сгурппированы после обычных import и разделены пустой строкой._
+
+  <details>
+
+  ```swift
+  // Неправильно
+
+  //  Copyright © 2018 Airbnb. All rights reserved.
+  //
+
+  import DLSPrimitives
+  @testable import Epoxy
+  import Foundation
+  import Nimble
+  import Quick
+
+  // Правильно
+
+  //  Copyright © 2018 Airbnb. All rights reserved.
+  //
+
+  import DLSPrimitives
+  import Foundation
+  import Nimble
+  import Quick
+
+  @testable import Epoxy
+  ```
+
+  </details>
+
+* <a id='limit-vertical-whitespace'></a>(<a href='#limit-vertical-whitespace'>link</a>) **Ограничьте пустые вертикальные пробелы одной строкой.** [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace)
+
+* <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Файлы должны заканчиваться новой строкой.** [![SwiftLint: trailing_newline](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
+
+## Совместимость с Objective-C
+
+* <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Старайтесь избегать наследования от NSObject.** Если ваш код должен быть использован каким-нибудь Objective-C кодом оберните его чтобы предоставить необходимую функциональность. Используйте `@objc` для отдельных функций и переменных вместо предоставления всего API класса при помощи `@objcMembers`.
+
+  <details>
+
+  ```swift
+  class PriceBreakdownViewController {
+
+    private let acceptButton = UIButton()
+
+    private func setUpAcceptButton() {
+      acceptButton.addTarget(
+        self,
+        action: #selector(didTapAcceptButton),
+        forControlEvents: .TouchUpInside)
+    }
+
+    @objc
+    private func didTapAcceptButton() {
+      // ...
+    }
+  }
+  ```
+
+  </details>
