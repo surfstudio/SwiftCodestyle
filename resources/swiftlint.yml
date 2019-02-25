@@ -86,7 +86,7 @@ custom_rules:
     open_iboutlets:
         included: ".*.swift"
         name: "IBOutlet opening"
-        regex: "@IBOutlet weak var"
+        regex: "@IBOutlet ?(weak){0,1} var"
         message: "IBOutlet should be private or fileprivate"
         severity: error
 
