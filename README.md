@@ -37,15 +37,15 @@
 
 _Вы можете добавить эти настройки воспользовавшись [этим скриптом](resources/xcode_settings.bash), как вариант его вызов можно добавить в "Run Script" build phase._
 
-* <a id='column-width'></a>(<a href='#column-width'>link</a>) **Каждая строка должна иметь максимальную длину в 120 символов.** [![SwiftLint: line_length](https://img.shields.io/badge/SwiftLint-line__length-217D89.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#line-length)
+* <a id='column-width'></a><a href='#column-width'>#</a> **Каждая строка должна иметь максимальную длину в 120 символов.** [![SwiftLint: line_length](https://img.shields.io/badge/SwiftLint-line__length-217D89.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#line-length)
 
-* <a id='spaces-over-tabs'></a>(<a href='#spaces-over-tabs'>link</a>) **Используйте 4 пробела для отступов.**
+* <a id='spaces-over-tabs'></a><a href='#spaces-over-tabs'>#</a> **Используйте 4 пробела для отступов.**
 
-* <a id='trailing-whitespace'></a>(<a href='#trailing-whitespace'>link</a>) **Строки не должны содержать пробелы в конце.**  [![SwiftFormat: trailingSpace](https://img.shields.io/badge/SwiftFormat-trailingSpace-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingSpace) [![SwiftLint: trailing_whitespace](https://img.shields.io/badge/SwiftLint-trailing__whitespace-217D89.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-whitespace)
+* <a id='trailing-whitespace'></a><a href='#trailing-whitespace'>#</a> **Строки не должны содержать пробелы в конце.**  [![SwiftFormat: trailingSpace](https://img.shields.io/badge/SwiftFormat-trailingSpace-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#trailingSpace) [![SwiftLint: trailing_whitespace](https://img.shields.io/badge/SwiftLint-trailing__whitespace-217D89.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-whitespace)
 
 ## Именование
 
-* <a id='use-camel-case'></a>(<a href='#use-camel-case'>link</a>) **Используйте PascalCase для названий типов и протоколов, и lowerCamelCase для всего остального.** [![SwiftLint: type_name](https://img.shields.io/badge/SwiftLint-type__name-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#type-name)
+* <a id='use-camel-case'></a><a href='#use-camel-case'>#</a> **Используйте PascalCase для названий типов и протоколов, и lowerCamelCase для всего остального.** [![SwiftLint: type_name](https://img.shields.io/badge/SwiftLint-type__name-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#type-name)
 
   <details>
 
@@ -86,9 +86,9 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='bool-names'></a>(<a href='#bool-names'>link</a>) **Называйте булевые переменные в формате `isSpaceship`, `hasSpacesuit`, и т.п.** Так становится понятнее, что это именно Bool тип данных, а не какой-либо другой.
+* <a id='bool-names'></a><a href='#bool-names'>#</a> **Называйте булевые переменные в формате `isSpaceship`, `hasSpacesuit`, и т.п.** Так становится понятнее, что это именно Bool тип данных, а не какой-либо другой.
 
-* <a id='capitalize-acronyms'></a>(<a href='#capitalize-acronyms'>link</a>) **Акронимы в названиях (например `URL`) должны быть в верхнем регистре за исключением случаев, когда это начало названия которое должно быть в lowerCamelCase**
+* <a id='capitalize-acronyms'></a><a href='#capitalize-acronyms'>#</a> **Акронимы в названиях (например `URL`) должны быть в верхнем регистре за исключением случаев, когда это начало названия которое должно быть в lowerCamelCase**
 
   <details>
 
@@ -124,7 +124,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='general-part-first'></a>(<a href='#general-part-first'>link</a>) **Общая часть названия должна быть впереди, а более специфичная часть должна следовать за ней.** Значение "общая часть" зависит от конеткста, но должно примерно означать "то, что больше всего помогает вам сузить поиск нужного элемента." Самое главное, будьте последовательны с тем, как вы располагаете части имен.
+* <a id='general-part-first'></a><a href='#general-part-first'>#</a> **Общая часть названия должна быть впереди, а более специфичная часть должна следовать за ней.** Значение "общая часть" зависит от конеткста, но должно примерно означать "то, что больше всего помогает вам сузить поиск нужного элемента." Самое главное, будьте последовательны с тем, как вы располагаете части имен.
 
   <details>
 
@@ -144,7 +144,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='hint-at-types'></a>(<a href='#hint-at-types'>link</a>) **Включите подсказку о типе в имя, если в противном случае оно будет неоднозначным.**
+* <a id='hint-at-types'></a><a href='#hint-at-types'>#</a> **Включите подсказку о типе в имя, если в противном случае оно будет неоднозначным.**
 
   <details>
 
@@ -160,7 +160,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='past-tense-events'></a>(<a href='#past-tense-events'>link</a>) **Обработчики событий должны быть названы как предложения в настоящем времени.** Детали можно опустить, если они не нужны для ясности.
+* <a id='past-tense-events'></a><a href='#past-tense-events'>#</a> **Обработчики событий должны быть названы как предложения в настоящем времени.** Детали можно опустить, если они не нужны для ясности.
 
   <details>
 
@@ -200,7 +200,7 @@ _Вы можете добавить эти настройки воспользо
 
 ## Стиль
 
-* <a id='use-implicit-types'></a>(<a href='#use-implicit-types'>link</a>) **Не указываете типы там, где они легко могут быть выведены**
+* <a id='use-implicit-types'></a><a href='#use-implicit-types'>#</a> **Не указываете типы там, где они легко могут быть выведены**
 
   <details>
 
@@ -229,7 +229,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='use-implicit-types'></a>(<a href='#use-implicit-types'>link</a>) **Условные операторы должны всегда вызывать `return` в следующей строке** [![SwiftLint: conditional_returns_on_newline](https://img.shields.io/badge/SwiftLint-trailing__comma-217D89.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#conditional-returns-on-newline)
+* <a id='use-implicit-types'></a><a href='#use-implicit-types'>#</a> **Условные операторы должны всегда вызывать `return` в следующей строке** [![SwiftLint: conditional_returns_on_newline](https://img.shields.io/badge/SwiftLint-trailing__comma-217D89.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#conditional-returns-on-newline)
 
   <details>
 
@@ -251,7 +251,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='omit-self'></a>(<a href='#omit-self'>link</a>) **Не используйте `self` пока это не нужно для уточнения или пока того не требует язык** [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantSelf)
+* <a id='omit-self'></a><a href='#omit-self'>#</a> **Не используйте `self` пока это не нужно для уточнения или пока того не требует язык** [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantSelf)
 
   <details>
 
@@ -289,7 +289,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='trailing-comma-array'></a>(<a href='#trailing-comma-array'>link</a>) **Следует избегать закрывающей запятой в массивах и словарях** [![SwiftLint: trailing_comma](https://img.shields.io/badge/SwiftLint-trailing__comma-217D89.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-comma)
+* <a id='trailing-comma-array'></a><a href='#trailing-comma-array'>#</a> **Следует избегать закрывающей запятой в массивах и словарях** [![SwiftLint: trailing_comma](https://img.shields.io/badge/SwiftLint-trailing__comma-217D89.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-comma)
 
   <details>
 
@@ -311,7 +311,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='name-tuple-elements'></a>(<a href='#name-tuple-elements'>link</a>) **Именуйте свойства в кортеже для большей ясности** Эмпирическое правило: если у вас есть более 3 полей, вы, вероятно, должны использовать структуру.
+* <a id='name-tuple-elements'></a><a href='#name-tuple-elements'>#</a> **Именуйте свойства в кортеже для большей ясности** Эмпирическое правило: если у вас есть более 3 полей, вы, вероятно, должны использовать структуру.
 
   <details>
 
@@ -342,7 +342,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='favor-constructors'></a>(<a href='#favor-constructors'>link</a>) **Используйте конструкторы вместо Make() функций для CGRect, CGPoint, NSRange и других.** [![SwiftLint: legacy_constructor](https://img.shields.io/badge/SwiftLint-legacy__constructor-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor)
+* <a id='favor-constructors'></a><a href='#favor-constructors'>#</a> **Используйте конструкторы вместо Make() функций для CGRect, CGPoint, NSRange и других.** [![SwiftLint: legacy_constructor](https://img.shields.io/badge/SwiftLint-legacy__constructor-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constructor)
 
   <details>
 
@@ -356,7 +356,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='use-modern-swift-extensions'></a>(<a href='#use-modern-swift-extensions'>link</a>) **Используйте современные Swift расширения методов вместо старых глобальных методов из Objective-C.** [![SwiftLint: legacy_cggeometry_functions](https://img.shields.io/badge/SwiftLint-legacy__cggeometry__functions-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-cggeometry-functions) [![SwiftLint: legacy_constant](https://img.shields.io/badge/SwiftLint-legacy__constant-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constant) [![SwiftLint: legacy_nsgeometry_functions](https://img.shields.io/badge/SwiftLint-legacy__nsgeometry__functions-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-nsgeometry-functions)
+* <a id='use-modern-swift-extensions'></a><a href='#use-modern-swift-extensions'>#</a> **Используйте современные Swift расширения методов вместо старых глобальных методов из Objective-C.** [![SwiftLint: legacy_cggeometry_functions](https://img.shields.io/badge/SwiftLint-legacy__cggeometry__functions-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-cggeometry-functions) [![SwiftLint: legacy_constant](https://img.shields.io/badge/SwiftLint-legacy__constant-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-constant) [![SwiftLint: legacy_nsgeometry_functions](https://img.shields.io/badge/SwiftLint-legacy__nsgeometry__functions-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#legacy-nsgeometry-functions)
 
   <details>
 
@@ -372,7 +372,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='colon-spacing'></a>(<a href='#colon-spacing'>link</a>) **Ставьте двоеточие и пробел сразу после идентификатора.** [![SwiftLint: colon](https://img.shields.io/badge/SwiftLint-colon-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#colon)
+* <a id='colon-spacing'></a><a href='#colon-spacing'>#</a> **Ставьте двоеточие и пробел сразу после идентификатора.** [![SwiftLint: colon](https://img.shields.io/badge/SwiftLint-colon-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#colon)
 
   <details>
 
@@ -407,7 +407,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='return-arrow-spacing'></a>(<a href='#return-arrow-spacing'>link</a>) **Ставьте пробел по обеим сторонам стрелки возвращаемого типа.** [![SwiftLint: return_arrow_whitespace](https://img.shields.io/badge/SwiftLint-return__arrow__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#returning-whitespace)
+* <a id='return-arrow-spacing'></a><a href='#return-arrow-spacing'>#</a> **Ставьте пробел по обеим сторонам стрелки возвращаемого типа.** [![SwiftLint: return_arrow_whitespace](https://img.shields.io/badge/SwiftLint-return__arrow__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#returning-whitespace)
 
   <details>
 
@@ -437,7 +437,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='unnecessary-parens'></a>(<a href='#unnecessary-parens'>link</a>) **Избегайте лишних скобок.** [![SwiftFormat: redundantParens](https://img.shields.io/badge/SwiftFormat-redundantParens-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantParens)
+* <a id='unnecessary-parens'></a><a href='#unnecessary-parens'>#</a> **Избегайте лишних скобок.** [![SwiftFormat: redundantParens](https://img.shields.io/badge/SwiftFormat-redundantParens-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantParens)
 
   <details>
 
@@ -457,7 +457,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='unnecessary-enum-arguments'></a> (<a href='#unnecessary-enum-arguments'>link</a>) **Опустите аргументы case, если они все без имени** [![SwiftLint: empty_enum_arguments](https://img.shields.io/badge/SwiftLint-empty__enum__arguments-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-enum-arguments)
+* <a id='unnecessary-enum-arguments'></a> <a href='#unnecessary-enum-arguments'>#</a> **Опустите аргументы case, если они все без имени** [![SwiftLint: empty_enum_arguments](https://img.shields.io/badge/SwiftLint-empty__enum__arguments-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-enum-arguments)
 
   <details>
 
@@ -483,7 +483,7 @@ _Вы можете добавить эти настройки воспользо
 
 ### Функции
 
-* <a id='omit-function-void-return'></a>(<a href='#omit-function-void-return'>link</a>) **Опускайте возвращаемы тип `Void`.** [![SwiftLint: redundant_void_return](https://img.shields.io/badge/SwiftLint-redundant__void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
+* <a id='omit-function-void-return'></a><a href='#omit-function-void-return'>#</a> **Опускайте возвращаемы тип `Void`.** [![SwiftLint: redundant_void_return](https://img.shields.io/badge/SwiftLint-redundant__void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
 
   <details>
 
@@ -503,7 +503,7 @@ _Вы можете добавить эти настройки воспользо
 
 ### Замыкания
 
-* <a id='favor-void-closure-return'></a>(<a href='#favor-void-closure-return'>link</a>) **Используйте возвращаемый тип `Void` вместо `()` в определении замыкания.** [![SwiftLint: void_return](https://img.shields.io/badge/SwiftLint-void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#void-return)
+* <a id='favor-void-closure-return'></a><a href='#favor-void-closure-return'>#</a> **Используйте возвращаемый тип `Void` вместо `()` в определении замыкания.** [![SwiftLint: void_return](https://img.shields.io/badge/SwiftLint-void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#void-return)
 
   <details>
 
@@ -521,7 +521,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='unused-closure-parameter-naming'></a>(<a href='#unused-closure-parameter-naming'>link</a>) **Именуйте неиспользуемые параметры замыкания как нижние подчеркивания (`_`).** [![SwiftLint: unused_closure_parameter](https://img.shields.io/badge/SwiftLint-unused__closure__parameter-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-closure-parameter)
+* <a id='unused-closure-parameter-naming'></a><a href='#unused-closure-parameter-naming'>#</a> **Именуйте неиспользуемые параметры замыкания как нижние подчеркивания (`_`).** [![SwiftLint: unused_closure_parameter](https://img.shields.io/badge/SwiftLint-unused__closure__parameter-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-closure-parameter)
 
     <details>
 
@@ -542,7 +542,7 @@ _Вы можете добавить эти настройки воспользо
 
     </details>
 
-* <a id='closure-brace-spacing'></a>(<a href='#closure-brace-spacing'>link</a>) **Однострочные замыкания должны содержать по одному пробелу до и после каждой скобки, за исключением пробела между закрывающей скобкой и следующим оператором.** [![SwiftLint: closure_spacing](https://img.shields.io/badge/SwiftLint-closure__spacing-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
+* <a id='closure-brace-spacing'></a><a href='#closure-brace-spacing'>#</a> **Однострочные замыкания должны содержать по одному пробелу до и после каждой скобки, за исключением пробела между закрывающей скобкой и следующим оператором.** [![SwiftLint: closure_spacing](https://img.shields.io/badge/SwiftLint-closure__spacing-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#closure-spacing)
 
   <details>
 
@@ -558,7 +558,7 @@ _Вы можете добавить эти настройки воспользо
 
 ### Операторы
 
-* <a id='infix-operator-spacing'></a>(<a href='#infix-operator-spacing'>link</a>) **Инфиксные операторы должны отделятся одним пробелом с каждой стороны.** Предпочитайте скобки, чтобы визуально группировать выражения с большим количеством операторов, а не изменять ширину пробелов. Это правило не относится к операторам диапазона (например, `1...3`) и к префиксным или постфиксным операторам (например, `guest?` или `-1`). [![SwiftLint: operator_usage_whitespace](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#operator-usage-whitespace)
+* <a id='infix-operator-spacing'></a><a href='#infix-operator-spacing'>#</a> **Инфиксные операторы должны отделятся одним пробелом с каждой стороны.** Предпочитайте скобки, чтобы визуально группировать выражения с большим количеством операторов, а не изменять ширину пробелов. Это правило не относится к операторам диапазона (например, `1...3`) и к префиксным или постфиксным операторам (например, `guest?` или `-1`). [![SwiftLint: operator_usage_whitespace](https://img.shields.io/badge/SwiftLint-operator__usage__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#operator-usage-whitespace)
 
   <details>
 
@@ -582,7 +582,7 @@ _Вы можете добавить эти настройки воспользо
 
 ## Паттерны
 
-* <a id='implicitly-unwrapped-optionals'></a>(<a href='#implicitly-unwrapped-optionals'>link</a>) **Инициализируйте свойства в `init` где это возможно, а не используйте форс-анвраппинг.**  Заметным исключением является UIViewController и его `view` свойство. [![SwiftLint: implicitly_unwrapped_optional](https://img.shields.io/badge/SwiftLint-implicitly__unwrapped__optional-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#implicitly-unwrapped-optional)
+* <a id='implicitly-unwrapped-optionals'></a><a href='#implicitly-unwrapped-optionals'>#</a> **Инициализируйте свойства в `init` где это возможно, а не используйте форс-анвраппинг.**  Заметным исключением является UIViewController и его `view` свойство. [![SwiftLint: implicitly_unwrapped_optional](https://img.shields.io/badge/SwiftLint-implicitly__unwrapped__optional-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#implicitly-unwrapped-optional)
 
   <details>
 
@@ -614,9 +614,9 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='time-intensive-init'></a>(<a href='#time-intensive-init'>link</a>) **Избегайте выполнение любой значимой или времязратной работый в `init()`.** Избегайте таких действий, как открытие соединения с базой данных, выполнение запросов в сеть, чтение большого объема данных с диска и т.п. Создайте метод вроде `start()` если вам нужно чтобы эти действия были выполнены до того как объект будет готов к использованию.
+* <a id='time-intensive-init'></a><a href='#time-intensive-init'>#</a> **Избегайте выполнение любой значимой или времязратной работый в `init()`.** Избегайте таких действий, как открытие соединения с базой данных, выполнение запросов в сеть, чтение большого объема данных с диска и т.п. Создайте метод вроде `start()` если вам нужно чтобы эти действия были выполнены до того как объект будет готов к использованию.
 
-* <a id='complex-property-observers'></a>(<a href='#complex-property-observers'>link</a>) **Выносите сложные наблюдатели свойств в методы.** Это уменьшает вложенность, отделяет сайд-эффекты от объявления и делает явным использование неявно передаваемых параметров, таких как `oldValue`.
+* <a id='complex-property-observers'></a><a href='#complex-property-observers'>#</a> **Выносите сложные наблюдатели свойств в методы.** Это уменьшает вложенность, отделяет сайд-эффекты от объявления и делает явным использование неявно передаваемых параметров, таких как `oldValue`.
 
   <details>
 
@@ -652,7 +652,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='complex-callback-block'></a>(<a href='#complex-callback-block'>link</a>) **Выносите сложные определения замыканий в методы**.  Это уменьшает вложенность и сложность использования weak-self в блоках. Если необходимо сослаться на self в вызове замыкания, используйте `guard`, чтобы развернуть self на время вызова.
+* <a id='complex-callback-block'></a><a href='#complex-callback-block'>#</a> **Выносите сложные определения замыканий в методы**.  Это уменьшает вложенность и сложность использования weak-self в блоках. Если необходимо сослаться на self в вызове замыкания, используйте `guard`, чтобы развернуть self на время вызова.
 
   <details>
 
@@ -689,7 +689,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='guards-at-top'></a>(<a href='#guards-at-top'>link</a>) **Используйте `guard` в начале скоупа.**
+* <a id='guards-at-top'></a><a href='#guards-at-top'>#</a> **Используйте `guard` в начале скоупа.**
 
   <details>
 
@@ -698,9 +698,9 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='limit-access-control'></a>(<a href='#limit-access-control'>link</a>) **Контроль доступа должен быть максимально строгим.** Предпочитайте использование `public` вместо `open` и `private` вместо `fileprivate` пока вам не понадобится это поведение.
+* <a id='limit-access-control'></a><a href='#limit-access-control'>#</a> **Контроль доступа должен быть максимально строгим.** Предпочитайте использование `public` вместо `open` и `private` вместо `fileprivate` пока вам не понадобится это поведение.
 
-* <a id='avoid-global-functions'></a>(<a href='#avoid-global-functions'>link</a>) **Избегайте глобальных функций где это возможно.** Предпочитайте методы в определениях типов.
+* <a id='avoid-global-functions'></a><a href='#avoid-global-functions'>#</a> **Избегайте глобальных функций где это возможно.** Предпочитайте методы в определениях типов.
 
   <details>
 
@@ -730,7 +730,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='private-constants'></a>(<a href='#private-constants'>link</a>) **Предпочитайте выделять константы в закрытый enum.** Если константы должны быть открыты, сделайте их статичными внутри определения класса.
+* <a id='private-constants'></a><a href='#private-constants'>#</a> **Предпочитайте выделять константы в закрытый enum.** Если константы должны быть открыты, сделайте их статичными внутри определения класса.
 
   <details>
 
@@ -752,7 +752,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='namespace-using-enums'></a>(<a href='#namespace-using-enums'>link</a>) **Используйте `enum` без case для организации `public` или `internal` констант и функций в пространства имен.** Избегайте создания глобальных констант или функций. Не стесняйтесь вкладывать пространства имен, где это добавляет ясности.
+* <a id='namespace-using-enums'></a><a href='#namespace-using-enums'>#</a> **Используйте `enum` без case для организации `public` или `internal` констант и функций в пространства имен.** Избегайте создания глобальных констант или функций. Не стесняйтесь вкладывать пространства имен, где это добавляет ясности.
 
   <details>
 
@@ -774,7 +774,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='prefer-immutable-values'></a>(<a href='#prefer-immutable-values'>link</a>) **Используйте неизменяемые значения где это возможно.** Используйте `map` и `compactMap` вместо добавления в новую коллекцию. Используйте `filter` вмето удаления элементов из изменяемой коллекции.
+* <a id='prefer-immutable-values'></a><a href='#prefer-immutable-values'>#</a> **Используйте неизменяемые значения где это возможно.** Используйте `map` и `compactMap` вместо добавления в новую коллекцию. Используйте `filter` вмето удаления элементов из изменяемой коллекции.
 
   <details>
 
@@ -808,7 +808,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='final-classes-by-default'></a>(<a href='#final-classes-by-default'>link</a>) **Классы должны быть `final`, если другого не требует логика.**
+* <a id='final-classes-by-default'></a><a href='#final-classes-by-default'>#</a> **Классы должны быть `final`, если другого не требует логика.**
 
   <details>
 
@@ -829,7 +829,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='switch-never-default'></a>(<a href='#switch-never-default'>link</a>) **Никогда не используйте `default` case в `switch`.**
+* <a id='switch-never-default'></a><a href='#switch-never-default'>#</a> **Никогда не используйте `default` case в `switch`.**
 
   <details>
 
@@ -856,11 +856,11 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='optional-nil-check'></a>(<a href='#optional-nil-check'>link</a>) **Проверьте значение nil вместо использования разворачивания, если значение не требуется.** [![SwiftLint: unused_optional_binding](https://img.shields.io/badge/SwiftLint-unused_optional_binding-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-optional-binding)
+* <a id='optional-nil-check'></a><a href='#optional-nil-check'>#</a> **Проверьте значение nil вместо использования разворачивания, если значение не требуется.** [![SwiftLint: unused_optional_binding](https://img.shields.io/badge/SwiftLint-unused_optional_binding-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#unused-optional-binding)
 
 ## Организация файлов
 
-* <a id='alphabetize-imports'></a>(<a href='#alphabetize-imports'>link</a>) **Сортируйте импорты по алфавиту и ставьте их после комментариев в заголовке файла.** [![SwiftFormat: sortedImports](https://img.shields.io/badge/SwiftFormat-sortedImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#sortedImports)
+* <a id='alphabetize-imports'></a><a href='#alphabetize-imports'>#</a> **Сортируйте импорты по алфавиту и ставьте их после комментариев в заголовке файла.** [![SwiftFormat: sortedImports](https://img.shields.io/badge/SwiftFormat-sortedImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#sortedImports)
 
   <details>
 
@@ -922,13 +922,13 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='limit-vertical-whitespace'></a>(<a href='#limit-vertical-whitespace'>link</a>) **Ограничьте пустые вертикальные пробелы одной строкой.** [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace)
+* <a id='limit-vertical-whitespace'></a><a href='#limit-vertical-whitespace'>#</a> **Ограничьте пустые вертикальные пробелы одной строкой.** [![SwiftLint: vertical_whitespace](https://img.shields.io/badge/SwiftLint-vertical__whitespace-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#vertical-whitespace)
 
-* <a id='newline-at-eof'></a>(<a href='#newline-at-eof'>link</a>) **Файлы должны заканчиваться новой строкой.** [![SwiftLint: trailing_newline](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
+* <a id='newline-at-eof'></a><a href='#newline-at-eof'>#</a> **Файлы должны заканчиваться новой строкой.** [![SwiftLint: trailing_newline](https://img.shields.io/badge/SwiftLint-trailing__newline-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#trailing-newline)
 
 ## Совместимость с Objective-C
 
-* <a id='prefer-pure-swift-classes'></a>(<a href='#prefer-pure-swift-classes'>link</a>) **Старайтесь избегать наследования от NSObject.** Если ваш код должен быть использован каким-нибудь Objective-C кодом оберните его чтобы предоставить необходимую функциональность. Используйте `@objc` для отдельных функций и переменных вместо предоставления всего API класса при помощи `@objcMembers`.
+* <a id='prefer-pure-swift-classes'></a><a href='#prefer-pure-swift-classes'>#</a> **Старайтесь избегать наследования от NSObject.** Если ваш код должен быть использован каким-нибудь Objective-C кодом оберните его чтобы предоставить необходимую функциональность. Используйте `@objc` для отдельных функций и переменных вместо предоставления всего API класса при помощи `@objcMembers`.
 
   <details>
 
