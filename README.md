@@ -870,7 +870,7 @@ _Вы можете добавить эти настройки воспользо
   ```swift
   // Неправильно
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
+  //  Copyright © 2018 Surf. All rights reserved.
   //
   import DLSPrimitives
   import Constellation
@@ -880,7 +880,7 @@ _Вы можете добавить эти настройки воспользо
 
   // Правильно
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
+  //  Copyright © 2018 Surf. All rights reserved.
   //
 
   import Constellation
