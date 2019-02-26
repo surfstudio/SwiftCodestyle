@@ -17,12 +17,12 @@
 * Этот гайд являеся дополнением официальному [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/)
 * Мы стараемся сделать каждое правило проверяемым при помощи различных linter-ов
 
-## Table of Contents
+## Содержание
 
 - [Surf Swift Style Guide](#surf-swift-style-guide)
   - [Цели](#%D1%86%D0%B5%D0%BB%D0%B8)
   - [Принципы](#%D0%BF%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF%D1%8B)
-  - [Table of Contents](#table-of-contents)
+  - [Содержание](#%D1%81%D0%BE%D0%B4%D0%B5%D1%80%D0%B6%D0%B0%D0%BD%D0%B8%D0%B5)
   - [Xcode форматирование](#xcode-%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)
   - [Именование](#%D0%B8%D0%BC%D0%B5%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)
   - [Стиль](#%D1%81%D1%82%D0%B8%D0%BB%D1%8C)
@@ -35,7 +35,7 @@
 
 ## Xcode форматирование
 
-_Вы можете добавить эти настройки воспользовавшись [этим скриптом](resources/xcode_settings.bash), как вариант его вызов можно добавить в "Run Script" build phase._
+_Вы можете добавить эти настройки воспользовавшись [этим скриптом](resources/xcode_settings.bash), как вариант, его вызов можно добавить в "Run Script" build phase._
 
 * <a id='column-width'></a><a href='#column-width'>#</a> **Каждая строка должна иметь максимальную длину в 120 символов.** [![SwiftLint: line_length](https://img.shields.io/badge/SwiftLint-line__length-217D89.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#line-length)
 
@@ -65,7 +65,7 @@ _Вы можете добавить эти настройки воспользо
     }
 
     var ships: [Spaceship] = []
-    static let worldName: String = "Earth"
+    static let worldName = "Earth"
 
     func addShip(_ ship: Spaceship) {
       // ...
@@ -437,7 +437,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='unnecessary-parens'></a><a href='#unnecessary-parens'>#</a> **Избегайте лишних скобок.** [![SwiftFormat: redundantParens](https://img.shields.io/badge/SwiftFormat-redundantParens-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantParens)
+* <a id='unnecessary-parens'></a><a href='#unnecessary-parens'>#</a> **Избегайте лишних скобок.** [![SwiftFormat: redundantParens](https://img.shields.io/badge/SwiftFormat-redundantParens-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantParens) [![SwiftLint: empty_parentheses_with_trailing_closure](https://img.shields.io/badge/SwiftLint-empty__parentheses__with__trailing__closure-217D89.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-parentheses-with-trailing-closure)
 
   <details>
 
@@ -614,7 +614,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='time-intensive-init'></a><a href='#time-intensive-init'>#</a> **Избегайте выполнение любой значимой или времязратной работый в `init()`.** Избегайте таких действий, как открытие соединения с базой данных, выполнение запросов в сеть, чтение большого объема данных с диска и т.п. Создайте метод вроде `start()` если вам нужно чтобы эти действия были выполнены до того как объект будет готов к использованию.
+* <a id='time-intensive-init'></a><a href='#time-intensive-init'>#</a> **Избегайте выполнение любой значимой или времязатратной работы в `init()`.** Избегайте таких действий, как открытие соединения с базой данных, выполнение запросов в сеть, чтение большого объема данных с диска и т.п. Создайте метод вроде `start()` если вам нужно чтобы эти действия были выполнены до того как объект будет готов к использованию.
 
 * <a id='complex-property-observers'></a><a href='#complex-property-observers'>#</a> **Выносите сложные наблюдатели свойств в методы.** Это уменьшает вложенность, отделяет сайд-эффекты от объявления и делает явным использование неявно передаваемых параметров, таких как `oldValue`.
 
@@ -661,7 +661,7 @@ _Вы можете добавить эти настройки воспользо
   class MyClass {
 
     func request(completion: () -> Void) {
-      API.request() { [weak self] response in
+      API.request { [weak self] response in
         if let strongSelf = self {
           // Processing and side effects
         }
@@ -674,7 +674,7 @@ _Вы можете добавить эти настройки воспользо
   class MyClass {
 
     func request(completion: () -> Void) {
-      API.request() { [weak self] response in
+      API.request { [weak self] response in
         guard let strongSelf = self else { return }
         strongSelf.doSomething(strongSelf.property)
         completion()
@@ -774,7 +774,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='prefer-immutable-values'></a><a href='#prefer-immutable-values'>#</a> **Используйте неизменяемые значения где это возможно.** Используйте `map` и `compactMap` вместо добавления в новую коллекцию. Используйте `filter` вмето удаления элементов из изменяемой коллекции.
+* <a id='prefer-immutable-values'></a><a href='#prefer-immutable-values'>#</a> **Используйте неизменяемые значения где это возможно.** Используйте `map` и `compactMap` вместо добавления в новую коллекцию. Используйте `filter` вмеcто удаления элементов из изменяемой коллекции.
 
   <details>
 
@@ -860,7 +860,7 @@ _Вы можете добавить эти настройки воспользо
 
 ## Организация файлов
 
-* <a id='alphabetize-imports'></a><a href='#alphabetize-imports'>#</a> **Сортируйте импорты по алфавиту и ставьте их после комментариев в заголовке файла.** [![SwiftFormat: sortedImports](https://img.shields.io/badge/SwiftFormat-sortedImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#sortedImports)
+* <a id='alphabetize-imports'></a><a href='#alphabetize-imports'>#</a> **Сортируйте импорты по алфавиту и ставьте их после комментариев в заголовке файла.** Если одна из библиотек уже импортирует какие-то библиотеки необходимые в вашем модуле - их импорты можно опустить. [![SwiftFormat: sortedImports](https://img.shields.io/badge/SwiftFormat-sortedImports-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#sortedImports)
 
   <details>
 
@@ -874,8 +874,9 @@ _Вы можете добавить эти настройки воспользо
   //
   import DLSPrimitives
   import Constellation
-  import Epoxy
+  import Epoxy  
 
+  import UIKit
   import Foundation
 
   // Правильно
@@ -886,7 +887,7 @@ _Вы можете добавить эти настройки воспользо
   import Constellation
   import DLSPrimitives
   import Epoxy
-  import Foundation
+  import UIKit
   ```
 
   </details>
@@ -898,7 +899,7 @@ _Вы можете добавить эти настройки воспользо
   ```swift
   // Неправильно
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
+  //  Copyright © 2018 Surf. All rights reserved.
   //
 
   import DLSPrimitives
@@ -909,7 +910,7 @@ _Вы можете добавить эти настройки воспользо
 
   // Правильно
 
-  //  Copyright © 2018 Airbnb. All rights reserved.
+  //  Copyright © 2018 Surf. All rights reserved.
   //
 
   import DLSPrimitives
