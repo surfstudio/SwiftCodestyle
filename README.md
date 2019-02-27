@@ -251,7 +251,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='omit-self'></a><a href='#omit-self'>#</a> **Не используйте `self` пока это не нужно для уточнения или пока того не требует язык** [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantSelf)
+* <a id='omit-self'></a><a href='#omit-self'>#</a> **Не используйте `self` пока это не нужно для уточнения или пока того не требует язык.** Это правило не касается инициализаторов, там нужно использовать `self` всегда. [![SwiftFormat: redundantSelf](https://img.shields.io/badge/SwiftFormat-redundantSelf-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantSelf)
 
   <details>
 
@@ -259,13 +259,9 @@ _Вы можете добавить эти настройки воспользо
   final class Listing {
 
     init(capacity: Int, allowsPets: Bool) {
-      // Неправильно
-      self.capacity = capacity
-      self.isFamilyFriendly = !allowsPets // `self.` not required here
-
       // Правильно
       self.capacity = capacity
-      isFamilyFriendly = !allowsPets
+      self.isFamilyFriendly = !allowsPets
     }
 
     private let isFamilyFriendly: Bool
@@ -274,14 +270,10 @@ _Вы можете добавить эти настройки воспользо
     private func increaseCapacity(by amount: Int) {
       // Неправильно
       self.capacity += amount
-
-      // Правильно
-      capacity += amount
-
-      // Неправильно
       self.save()
 
       // Правильно
+      capacity += amount
       save()
     }
   }
