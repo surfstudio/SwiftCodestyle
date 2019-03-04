@@ -475,7 +475,7 @@ _Вы можете добавить эти настройки воспользо
 
 ### Функции
 
-* <a id='omit-function-void-return'></a><a href='#omit-function-void-return'>#</a> **Опускайте возвращаемы тип `Void`.** [![SwiftLint: redundant_void_return](https://img.shields.io/badge/SwiftLint-redundant__void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
+* <a id='omit-function-void-return'></a><a href='#omit-function-void-return'>#</a> **Опускайте возвращаемый тип `Void`.** [![SwiftLint: redundant_void_return](https://img.shields.io/badge/SwiftLint-redundant__void__return-007A87.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#redundant-void-return)
 
   <details>
 
