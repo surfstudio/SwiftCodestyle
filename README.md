@@ -692,6 +692,38 @@ _Вы можете добавить эти настройки воспользо
 
 * <a id='limit-access-control'></a><a href='#limit-access-control'>#</a> **Контроль доступа должен быть максимально строгим.** Предпочитайте использование `public` вместо `open` и `private` вместо `fileprivate` пока вам не понадобится это поведение.
 
+  <details>
+
+  ```swift
+  // Неправильно
+  final class ViewController {
+
+    @IBOutlet weak var tableView: UITableView!
+
+    var models: [Model] = []
+
+    func reload() {
+      // ...
+    }
+
+  }
+
+  // Правильно
+  final class ViewController {
+
+    @IBOutlet private weak var tableView: UITableView!
+
+    private var models: [Model] = []
+
+    private func reload() {
+      // ...
+    }
+
+  }
+  ```
+
+  </details>
+
 * <a id='avoid-global-functions'></a><a href='#avoid-global-functions'>#</a> **Избегайте глобальных функций где это возможно.** Предпочитайте методы в определениях типов.
 
   <details>
