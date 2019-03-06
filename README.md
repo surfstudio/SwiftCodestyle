@@ -429,7 +429,7 @@ _Вы можете добавить эти настройки воспользо
 
   </details>
 
-* <a id='unnecessary-parens'></a><a href='#unnecessary-parens'>#</a> **Избегайте лишних скобок.** [![SwiftFormat: redundantParens](https://img.shields.io/badge/SwiftFormat-redundantParens-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantParens) [![SwiftLint: empty_parentheses_with_trailing_closure](https://img.shields.io/badge/SwiftLint-empty__parentheses__with__trailing__closure-217D89.svg)](https://github.com/realm/SwiftLint/blob/master/Rules.md#empty-parentheses-with-trailing-closure)
+* <a id='unnecessary-parens'></a><a href='#unnecessary-parens'>#</a> **Избегайте лишних скобок.** [![SwiftFormat: redundantParens](https://img.shields.io/badge/SwiftFormat-redundantParens-7B0051.svg)](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md#redundantParens)
 
   <details>
 
