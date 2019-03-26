@@ -84,6 +84,24 @@ _Вы можете добавить эти настройки воспользо
   #### Почему?
   Есть некоторые случаи при которых повторение названия свойства или метода может быть проще для чтения и понимания, чем использование другого имени.
 
+  Например:
+
+  ```swift
+  final class BiometricAuthenticator {
+
+    static var canAuthenticate: Bool {
+        return _canAuthenticate()
+    }
+
+    ...
+
+    private static func _canAuthenticate() {
+      ...
+    }
+
+  }
+  ```
+
   </details>
 
 * <a id='bool-names'></a><a href='#bool-names'>#</a> **Называйте булевые переменные в формате `isSpaceship`, `hasSpacesuit`, и т.п.** Так становится понятнее, что это именно Bool тип данных, а не какой-либо другой.
