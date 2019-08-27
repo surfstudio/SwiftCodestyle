@@ -685,7 +685,9 @@ _Вы можете добавить эти настройки воспользо
 
     func request(completion: () -> Void) {
       API.request { [weak self] response in
-        guard let strongSelf = self else { return }
+        guard let strongSelf = self else { 
+          return
+        }
         strongSelf.doSomething(strongSelf.property)
         completion()
       }
