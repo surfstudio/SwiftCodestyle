@@ -185,59 +185,64 @@ _Вы можете добавить эти настройки воспользо
   ```swift
   // Неправильно
   class SomeViewController {
-
+  
     private func didTapLogin() {
       // ...
     }
-
+  
     private func didTapBookButton() {
       // ...
     }
-
+  
     private func modelDidChange() {
       // ...
     }
   }
-
+  
   // Правильно
   class SomeViewController {
-
+  
     private func login() {
       // ...
     }
-
+  
     private func handleBookButtonTap() {
       // ...
     }
-
+  
     private func modelChanged() {
       // ...
     }
   }
   ```
-  * <a id='able-suffix-misuse'></a><a href='#able-suffix-misuse'>#</a> **Названия протоколов должны явно отражать функциональное значение протоколов** Если протокол описывает методы, реализующие действия самомого объекта над другими объектами, лучше использовать Noun; если же он описывает действтия, которые можно совершить над объектом, реализующим протокол, лучше использовать Adjective с суффиксом -able.
+  </details>
+
+* <a id='able-suffix-misuse'></a><a href='#able-suffix-misuse'>#</a> **Названия протоколов должны явно отражать функциональное значение протоколов**. Если протокол описывает методы, реализующие действия самомого объекта над другими объектами, лучше использовать Noun; если же он описывает действия, которые можно совершить над объектом, реализующим протокол, лучше использовать Adjective с суффиксом -able.
 
   <details>
+
 
   ```swift
   // Неправильно
   protocol Presenter {
       func presentInView(view: UIView)
   }
-
+  
   protocol AlertPresentable {
     func presentAlert(alert: Alert)
   }
-
+  
   // Правильно
   protocol Presentable {
       func presentInView(view: UIView)
   }
-
+  
   protocol AlertPresenter {
     func presentAlert(alert: Alert)
   }
   ```
+
+  </details>
 
 ## Стиль
 
